@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 WireGuard LLC. All Rights Reserved.
+  ~ SPDX-License-Identifier: Apache-2.0
+  -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--第一层阴影-->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#e8e8e8" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <!--第二层前景-->
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white"/>
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+</layer-list>

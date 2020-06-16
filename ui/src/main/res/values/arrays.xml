@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 WireGuard LLC. All Rights Reserved.
+  ~ SPDX-License-Identifier: Apache-2.0
+  -->
+<resources>
+    <array name="loading">
+        <item>@mipmap/icon_loading0</item>
+        <item>@mipmap/icon_loading1</item>
+    </array>
+    <array name="set_title">
+        <item>通知设置</item>
+        <item>反馈建议</item>
+        <item>检查更新</item>
+        <item>清除缓存</item>
+        <item>切换账号</item>
+        <item>退出登录</item>
+    </array>
+
+</resources>

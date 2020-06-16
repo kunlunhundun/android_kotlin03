@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Multiselected">
+        <attr name="state_multiselected" format="boolean" />
+        <attr name="colorMultiselectActiveBackground" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="custom_color">
+        <attr name="colorBackground" format="reference|color" />
+    </declare-styleable>
+
+    <!--简单环形进度-->
+    <declare-styleable name="SimpleRoundProgress">
+        <!--圆环颜色-->
+        <attr name="srp_roundColor" format="color" />
+        <!--圆环的宽度-->
+        <attr name="srp_roundWidth" format="dimension" />
+        <!--圆环上的进度颜色-->
+        <attr name="srp_progressColor" format="color" />
+        <!--圆环上的进度宽度-->
+        <attr name="srp_progressWidth" format="dimension" />
+        <!--进度值的最大值，一般为100-->
+        <attr name="srp_max" format="integer" />
+        <!--开始角度，指定进度初始点的绘制位置-->
+        <attr name="srp_startAngle" format="integer" />
+        <!--样式，空心还是实心-->
+        <attr name="srp_style">
+            <enum name="STROKE" value="0" />
+            <enum name="FILL" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>
