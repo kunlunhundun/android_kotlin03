@@ -1,0 +1,138 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+version wireguardVersionName
+group groupName
+
+// Create a variable called keystorePropertiesFile, and initialize it to your
+// keystore.properties file, in the rootProject folder.
+final def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+android {
+    buildToolsVersion '29.0.3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+    }
+    compileSdkVersion 29
+    dataBinding.enabled true
+    viewBinding.enabled true
+    defaultConfig {
+        applicationId 'com.wireguard.android'
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode wireguardVersionCode
+        versionName wireguardVersionName
+        buildConfigField 'int', 'MIN_SDK_VERSION', "$minSdkVersion.apiLevel"
+    }
+    lintOptions {
+        abortOnError false
+        baseline file("lint-baseline.xml")
+        warningsAsErrors true
+
+    }
+    dataBinding {
+        enabled = true
+    }
+    // If the keystore file exists
+    if (keystorePropertiesFile.exists()) {
+        // Initialize a new Properties() object called keystoreProperties.
+        final def keystoreProperties = new Properties()
+
+        // Load your keystore.properties file into the keystoreProperties object.
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+        signingConfigs {
+            release {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+    }
+    buildTypes {
+        release {
+            if (keystorePropertiesFile.exists()) signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles "proguard-android-optimize.txt", "proguard-rules.pro"
+        }
+        debug {
+            debuggable true
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+    }
+    lintOptions {
+        disable('LongLogTag')
+    }
+}
+def lifecycleVersion = '2.2.0'
+
+def loggingInterceptor = "3.10.0"
+def retrofit2 = "2.4.0"
+def rxandroid = "2.0.2"
+def rxjava = "2.1.10"
+def rxlifecycle2 = "2.2.1"
+
+def dep = [
+        rxlifecycleKotlin       : "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxlifecycle2",
+        rxlifecycleComponents   : "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle2",
+        rxandroid               : "io.reactivex.rxjava2:rxandroid:$rxandroid",
+        rxjava                  : "io.reactivex.rxjava2:rxjava:$rxjava",
+        loggingInterceptor      : "com.squareup.okhttp3:logging-interceptor:$loggingInterceptor",
+        retrofit                : "com.squareup.retrofit2:retrofit:$retrofit2",
+        retrofitAdapterRxjava2  : "com.squareup.retrofit2:adapter-rxjava2:$retrofit2",
+        retrofitConverterGson   : "com.squareup.retrofit2:converter-gson:$retrofit2",
+    ]
+
+dependencies {
+    implementation project(":tunnel")
+    implementation "androidx.annotation:annotation:$annotationsVersion"
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinatorLayoutVersion"
+    implementation "androidx.biometric:biometric:$biometricVersion"
+    implementation "androidx.core:core-ktx:$coreKtxVersion"
+    implementation "androidx.databinding:databinding-runtime:$agpVersion"
+    implementation "androidx.fragment:fragment:$fragmentVersion"
+    implementation "androidx.preference:preference:$preferenceVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$lifecycleVersion"
+    implementation "com.google.android.material:material:$materialComponentsVersion"
+    implementation "com.journeyapps:zxing-android-embedded:$zxingEmbeddedVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation "net.sourceforge.streamsupport:android-retrofuture:$streamsupportVersion"
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
+
+
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation "com.github.dfqin:grantor:2.1.0"
+
+    //Retrofit相关
+    implementation([dep.loggingInterceptor,//用于查看http请求时的log
+                    dep.retrofit,
+                    dep.retrofitAdapterRxjava2,
+                    dep.retrofitConverterGson])
+    //RxJava相关
+    implementation([dep.rxandroid,
+                    dep.rxjava])
+    //RxLifecycle相关
+    implementation([dep.rxlifecycleKotlin,
+                    dep.rxlifecycleComponents])
+
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:unchecked'
+    options.deprecation = true
+}
