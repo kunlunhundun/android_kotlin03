@@ -7,8 +7,8 @@ This is an Android GUI for [WireGuard](https://www.wireguard.com/). It [opportun
 ## Building
 
 ```
-$ git clone --recurse-submodules https://git.zx2c4.com/wireguard-android
-$ cd wireguard-android
+$ git clone https://github.com/kunlunhundun/sonicdandroid.git
+$ cd sonicdandroid
 $ ./gradlew assembleRelease
 ```
 
