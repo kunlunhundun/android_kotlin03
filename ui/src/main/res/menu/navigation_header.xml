@@ -16,7 +16,8 @@
         android:adjustViewBounds="true"
         android:importantForAccessibility="no"
         android:scaleType="centerCrop"
-        android:src="@mipmap/icon_side_header"/>
+        android:visibility="visible"
+        android:src="@mipmap/icon_side_bg"/>
 
     <TextView
         android:id="@+id/drawer_title"

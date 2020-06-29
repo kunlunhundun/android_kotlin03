@@ -90,7 +90,7 @@ class AliMainActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSel
         navigation.setNavigationItemSelectedListener {
             item: MenuItem ->
             when (item.itemId) {
-                R.id.profiles -> {
+                R.id.share_friends -> {
                     val aliSettingActivity = Intent(this, AliSettingActivity::class.java)
                     startActivity(aliSettingActivity)
                 }
@@ -156,7 +156,7 @@ class AliMainActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSel
         ll_sign_out.setOnClickListener {
             AppConfigData.loginToken = ""
             AppConfigData.customerInfo = null;
-            val intent = Intent(this, LoginFirstActivity::class.java)
+            val intent = Intent(this, AliLoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
@@ -164,7 +164,7 @@ class AliMainActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSel
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.profiles -> {
+            R.id.share_friends -> {
                 val aliAppFilterActivity = Intent(this, AliAppFilterActivity::class.java)
                 startActivity(aliAppFilterActivity)
             }

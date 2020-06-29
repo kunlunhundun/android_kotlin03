@@ -63,7 +63,7 @@
     <string name="allow_remote_control_intents_summary_on">Le applicazioni esterne possono attivare tunnel (avanzato)</string>
     <string name="allow_remote_control_intents_title">Consenti applicazioni di controllo remoto</string>
     <string name="allowed_ips">IP consentiti</string>
-    <string name="app_name">WireGuard</string>
+    <string name="app_name">sirius</string>
     <string name="bad_config_context">%2$s di %1$s</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_error">%1$s in %2$s</string>

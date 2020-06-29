@@ -38,8 +38,10 @@ class AliAppFilterActivity : AliBaseActivity() {
     var originalAppFlag: Int = 0
     var hasModifyData: Boolean = false
 
+
     companion object {
         val APP_ITEM_IS_INCLUDE = "APP_ITEM_IS_INCLUDE"
+        var FILTER_RESULT_OK = 300
 
     }
     enum class AppItemType(val value: Int) {
@@ -72,6 +74,8 @@ class AliAppFilterActivity : AliBaseActivity() {
     }
 
     fun initData(){
+
+        setTile("VPN settings")
 
         var lastSelect = Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
         LogUtils.e("lastselect:",lastSelect)
@@ -150,6 +154,12 @@ class AliAppFilterActivity : AliBaseActivity() {
                     EventBus.getDefault().post(ReconnectTunnelEvent())
                 }
              }
+
+             val resultIntent = Intent()
+             val bundle = Bundle()
+             bundle.putString("key_select_app", "result")
+             resultIntent.putExtras(bundle)
+             this.setResult(FILTER_RESULT_OK, resultIntent)
              finish()
 
          })
@@ -170,9 +180,9 @@ class AliAppFilterActivity : AliBaseActivity() {
             Application.getAcache().put(CACHE_ALLOW_APP_FLAG,selectAppType.value.toString())
 
             rv_app_channel.visibility = View.GONE
-            iv_all_app_choose.visibility = View.VISIBLE
-            iv_exclude_app_choose.visibility = View.GONE
-            iv_include_app_choose.visibility = View.GONE
+            ck_all_app_choose.isChecked = true
+            ck_exclude_app_choose.isChecked = false
+            ck_include_app_choose.isChecked = false
         }
         cl_exclude_app.setOnClickListener {
             selectAppType = AppItemType.EXCLUDE
@@ -181,9 +191,9 @@ class AliAppFilterActivity : AliBaseActivity() {
             Application.getAcache().put(CACHE_ALLOW_APP_FLAG,  selectAppType.value.toString())
 
             rv_app_channel.visibility = View.VISIBLE
-            iv_all_app_choose.visibility = View.GONE
-            iv_exclude_app_choose.visibility = View.VISIBLE
-            iv_include_app_choose.visibility = View.GONE
+            ck_all_app_choose.isChecked = false
+            ck_exclude_app_choose.isChecked = true
+            ck_include_app_choose.isChecked = false
         }
         cl_include_app.setOnClickListener {
             selectAppType = AppItemType.INCLUDE
@@ -192,9 +202,9 @@ class AliAppFilterActivity : AliBaseActivity() {
             Application.getAcache().put(CACHE_ALLOW_APP_FLAG,  selectAppType.value.toString())
 
             rv_app_channel.visibility = View.VISIBLE
-            iv_all_app_choose.visibility = View.GONE
-            iv_exclude_app_choose.visibility = View.GONE
-            iv_include_app_choose.visibility = View.VISIBLE
+            ck_all_app_choose.isChecked = false
+            ck_exclude_app_choose.isChecked = false
+            ck_include_app_choose.isChecked = true
         }
     }
 
@@ -202,12 +212,12 @@ class AliAppFilterActivity : AliBaseActivity() {
 
         if (selectAppType == AppItemType.EXCLUDE) {
             rv_app_channel.visibility = View.VISIBLE
-            iv_all_app_choose.visibility = View.GONE
-            iv_exclude_app_choose.visibility = View.VISIBLE
+            ck_all_app_choose.isChecked = false
+            ck_exclude_app_choose.isChecked = true
         } else if (selectAppType == AppItemType.INCLUDE) {
             rv_app_channel.visibility = View.VISIBLE
-            iv_all_app_choose.visibility = View.GONE
-            iv_include_app_choose.visibility = View.VISIBLE
+            ck_all_app_choose.isChecked = false
+            ck_include_app_choose.isChecked = true
         }
 
         val manager =  LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false)

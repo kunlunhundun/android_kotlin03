@@ -31,12 +31,15 @@ class SignInterceptor : Interceptor {
             val buffer = Buffer()
             requestBody!!.writeTo(buffer)
 
+
             request = request.newBuilder()
                     .addHeader("token", AppConfigData.token?:"")
                     .addHeader("gatev", AppConfigData.GATEWAY_VERSION?:"")
                     .addHeader("appv", AppConfigData.APP_VERSION?:"")
                     .addHeader("deviceId", AppConfigData.deviceId?:"")
                     .addHeader("deviceBrand", AppConfigData.deviceBrand?:"")
+                    .addHeader("deviceSystem", AppConfigData.deviceSystem?:"")
+                    .addHeader("OsType", "android")
                     .addHeader("Authorization", AppConfigData.authorization?:"")
                     .addHeader("Content-Type","application/json")
                     .build()

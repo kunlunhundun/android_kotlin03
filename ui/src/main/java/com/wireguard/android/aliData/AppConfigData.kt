@@ -27,6 +27,9 @@ object AppConfigData {
     const val ACACHE_DEVICE_ID = "ACACHE_DEVICE_ID"
     const val ACACHE_DEVICE_BRAND = "ACACHE_DEVICE_BRAND"
 
+
+
+
     var token: String? = null
     var tokenHead: String? = null
     var authorization:String? = null
@@ -91,6 +94,15 @@ object AppConfigData {
             }
              return field
         }
+
+    var deviceSystem: String? = null
+        set(value) {
+           field = value
+        }
+        get() {
+           return android.os.Build.VERSION.RELEASE
+        }
+
     var loginToken: String? = null
         set(value) {
             field = value

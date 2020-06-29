@@ -61,7 +61,7 @@
     <string name="allow_remote_control_intents_summary_on">外部应用当前能够控制隧道（面向高级用户）</string>
     <string name="allow_remote_control_intents_title">授权外部控制</string>
     <string name="allowed_ips">路由的 IP 地址（段）</string>
-    <string name="app_name">SonicVPN</string>
+    <string name="app_name">siriusvpn</string>
     <string name="bad_config_context">%1$s 的 %2$s 字段</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_error">在 %2$s发生了%1$s的问题</string>
@@ -86,7 +86,7 @@
     <string name="config_rename_error">无法重命名配置 “%s”</string>
     <string name="config_save_error">无法保存 “%1$s” 的配置：%2$s</string>
     <string name="config_save_success">已保存 “%s” 的配置</string>
-    <string name="create_activity_title">创建 WireGuard 隧道</string>
+    <string name="create_activity_title">创建 sirius 隧道</string>
     <string name="create_bin_dir_error">无法创建本地二进制文件目录</string>
     <string name="create_downloads_file_error">无法在下载目录中创建文件</string>
     <string name="create_empty">手动创建</string>

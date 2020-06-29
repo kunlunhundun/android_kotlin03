@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base palette -->
-    <color name="primary_color">#21a0ff</color>
+    <color name="primary_color">#ff4e505f</color>
     <color name="primary_light_color">#ffffffff</color>
     <color name="primary_dark_color">#ffcccccc</color>
     <color name="secondary_color">#ff1a73e8</color>
@@ -12,12 +12,13 @@
     <color name="color_primary_text">#4DB6AC</color>
 
 
-    <color name="background_primary_color">#009688</color>
+    <color name="background_primary_color">#ff4e505f</color>
     <color name="text_primary_color">#4DB6AC</color>
     <color name="btn_primary_color">#009688</color>
     <color name="btn_text_color">#ffffff</color>
     <color name="transparent">#00000000</color>
     <color name="line_color">#e8e8e8</color>
+    <color name="text_666_color">#666666</color>
     <color name="text_black_color">#333333</color>
     <color name="text_light_black_color">#999999</color>
     <color name="text_white_color">#ffffff</color>
@@ -26,6 +27,9 @@
     <color name="bg_light_white_color">#f2f2f2</color>
     <color name="bg_light_blue_color">#68befc</color>
     <color name="bg_light_green_color">#68cfa9</color>
+    <color name="text_blue_color">#5AC896</color>
+    <color name="btn_blue_color">#5AC896</color>
+
 
     <!-- Theme variables -->
     <color name="color_control_normal">@color/primary_text_color</color>

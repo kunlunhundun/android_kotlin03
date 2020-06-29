@@ -22,6 +22,8 @@ import com.wireguard.android.aliData.response.LoginResponse
 import com.wireguard.android.alutils.CountDownTimer
 import com.wireguard.android.alutils.ToastUtils
 import com.wireguard.config.Config
+import java.math.BigDecimal
+import java.text.DecimalFormat
 
 class SplashPageActivity : RxAppCompatActivity() {
 
@@ -29,7 +31,7 @@ class SplashPageActivity : RxAppCompatActivity() {
     private var hasPaused: Boolean = false
 
     companion object {
-        private const val SPLASH_TIME = 2L
+        private const val SPLASH_TIME = 3500L  //3.5s
 
     }
 
@@ -53,7 +55,8 @@ class SplashPageActivity : RxAppCompatActivity() {
 
     fun initData() {
 
-        initTimer(SPLASH_TIME).start()
+        //initTimer(SPLASH_TIME).start()
+        gotoNext()
 
     }
 
@@ -63,7 +66,7 @@ class SplashPageActivity : RxAppCompatActivity() {
 
 
     private fun initTimer(time: Long): CountDownTimer {
-        mTimer = object : CountDownTimer(time * 1000, 1000) {
+        mTimer = object : CountDownTimer(time , 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
             }
@@ -109,7 +112,7 @@ class SplashPageActivity : RxAppCompatActivity() {
     }
 
     private fun gotoLoginAct() {
-        var intent = Intent(this@SplashPageActivity, LoginFirstActivity::class.java)
+        var intent = Intent(this@SplashPageActivity, AliLoginActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -131,7 +134,7 @@ class SplashPageActivity : RxAppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        mTimer.cancel()
+       // mTimer.cancel()
         hasPaused = true
     }
 

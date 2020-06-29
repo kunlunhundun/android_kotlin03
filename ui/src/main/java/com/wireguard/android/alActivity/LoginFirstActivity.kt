@@ -21,7 +21,7 @@ class LoginFirstActivity : AppCompatActivity() {
     fun initView() {
 
         bt_free_trial.setOnClickListener {
-
+            
             var intent = Intent(this, AliLoginActivity::class.java)
             intent.putExtra("PARAM_FROM","1")
             startActivity(intent)

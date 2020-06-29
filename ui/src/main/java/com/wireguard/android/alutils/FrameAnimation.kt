@@ -205,7 +205,7 @@ class FrameAnimation {
 
     }
 
-    private fun play(i: Int) {
+     fun play(i: Int) {
         mImageView!!.postDelayed(Runnable {
             if (isPause) {
                 if (isPause) {

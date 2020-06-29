@@ -34,7 +34,9 @@ class AliSelectAppDetailActivity : AliBaseActivity() {
 
     private fun initData() {
 
-       isFromInclude =  intent.getBooleanExtra(AliAppFilterActivity.APP_ITEM_IS_INCLUDE,false)
+        setTile("App select")
+
+        isFromInclude =  intent.getBooleanExtra(AliAppFilterActivity.APP_ITEM_IS_INCLUDE,false)
         selectedAppList = if (isFromInclude) Application.getIncludeAppList() else Application.getExcludeAppList()
         mListData =Application.getAllAppList()
         mListData.forEach {

@@ -39,17 +39,22 @@
            app:layout_constraintTop_toTopOf="parent"
            app:layout_constraintBottom_toBottomOf="parent"
            />
-       <ImageView
-           android:id="@+id/iv_all_app_choose"
+
+       <CheckBox
+           android:id="@+id/ck_all_app_choose"
            android:layout_marginRight="15dp"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:scaleType="fitXY"
-           android:src="@mipmap/icon_filter_select"
+           android:background="@drawable/ali_app_detail_check"
+           android:button="@null"
+           android:checked="true"
+           android:clickable="false"
            app:layout_constraintRight_toRightOf="parent"
            app:layout_constraintTop_toTopOf="parent"
            app:layout_constraintBottom_toBottomOf="parent"
            />
+
        <TextView
            android:layout_width="match_parent"
            android:layout_height="1dp"
@@ -82,18 +87,22 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
-        <ImageView
-            android:id="@+id/iv_exclude_app_choose"
+
+        <CheckBox
+            android:id="@+id/ck_exclude_app_choose"
             android:layout_marginRight="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:src="@mipmap/icon_filter_select"
-            android:visibility="gone"
+            android:background="@drawable/ali_app_detail_check"
+            android:button="@null"
+            android:checked="false"
+            android:clickable="false"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -126,18 +135,22 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
-        <ImageView
-            android:id="@+id/iv_include_app_choose"
+
+        <CheckBox
+            android:id="@+id/ck_include_app_choose"
             android:layout_marginRight="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:src="@mipmap/icon_filter_select"
-            android:visibility="gone"
+            android:background="@drawable/ali_app_detail_check"
+            android:button="@null"
+            android:checked="false"
+            android:clickable="false"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -171,10 +184,10 @@
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_add_app"
-            android:layout_width="110dp"
-            android:layout_height="28dp"
+            android:layout_width="120dp"
+            android:layout_height="36dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/ali_add_apps_radius"
+            android:background="@mipmap/icon_add_app"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -185,6 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:src="@mipmap/icon_add"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -196,6 +210,7 @@
                 android:text="Add apps"
                 android:textSize="14sp"
                 android:textColor="@color/text_black_color"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/iv_add"

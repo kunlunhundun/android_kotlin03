@@ -19,6 +19,8 @@ abstract class AliBaseActivity : RxAppCompatActivity() {
     private var mToolbarTitle: TextView? = null
     private var mToolbarAction: TextView? = null
     private var mToolbarIcon: ImageView? = null
+    private var mHomeLogoImage: ImageView? = null
+    private var mRightIcon: ImageView? = null
     private var mToolbar: Toolbar? = null
     private var mClickListener: View.OnClickListener? = null
 
@@ -30,6 +32,8 @@ abstract class AliBaseActivity : RxAppCompatActivity() {
         mToolbarIcon = findViewById(R.id.toolbar_icon)
         mToolbarTitle = findViewById(R.id.toolbar_title)
         mToolbarAction = findViewById(R.id.action_area)
+        mHomeLogoImage = findViewById(R.id.iv_home_logo)
+        mRightIcon = findViewById(R.id.iv_right_logo)
         if (mToolbar != null) {
             //将Toolbar显示到界面
             setSupportActionBar(mToolbar)
@@ -66,6 +70,15 @@ abstract class AliBaseActivity : RxAppCompatActivity() {
             mToolbarTitle?.text = title
         }
     }
+
+    protected fun setHasHomeLogo(hasHomeLogo: Boolean) {
+        mHomeLogoImage?.visibility = if (hasHomeLogo) View.VISIBLE else View.GONE
+    }
+
+    protected fun setHasRightLogo(hasRightLogo: Boolean) {
+        mRightIcon?.visibility = if (hasRightLogo) View.VISIBLE else View.GONE
+    }
+
 
     protected fun setBackListener(listener: View.OnClickListener) {
         mClickListener = listener

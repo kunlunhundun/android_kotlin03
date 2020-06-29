@@ -14,6 +14,7 @@ import com.kaopiz.kprogresshud.KProgressHUD
 
 import com.wireguard.android.R
 import com.wireguard.android.alutils.FrameAnimation
+import com.wireguard.android.alutils.LogUtils
 
 object LoadingDialog {
     private var dialog: Dialog? = null
@@ -27,10 +28,12 @@ object LoadingDialog {
         } */
 
         if (dialProgress != null && dialProgress!!.isShowing()) {
+            LogUtils.e("dialProgress!!.isShowing")
             return
         }
         cancel()
         if (activity == null) {
+            LogUtils.e("activity == null")
             return
         }
         mActivity = WeakReference<Activity>(activity!!)
@@ -48,6 +51,7 @@ object LoadingDialog {
                 .show();
 
         if (!(mActivity?.get()?.isFinishing ?: true)) {
+            LogUtils.e("show dialProgress")
             dialProgress?.show()
         }
 

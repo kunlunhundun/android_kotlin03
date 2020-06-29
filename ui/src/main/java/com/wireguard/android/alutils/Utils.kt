@@ -296,12 +296,21 @@ object Utils {
     fun isPasswordCorrect(inputText: String): Boolean {
         var password = inputText
         if (TextUtils.isEmpty(password) || password.length < 5) {
-            ToastUtils.show("请输入5-16位数字及字母的组合密码")
+           // ToastUtils.show("请输入5-16位数字及字母的组合密码")
             return false
         }
         if (password.matches(Regex("^[0-9]{1,16}")) || password.matches(Regex("^[a-zA-Z]{1,16}"))) {
             // customView.showError("密码需使用数字及字母的组合")
-            ToastUtils.show("密码需使用数字及字母的组合")
+          //  ToastUtils.show("密码需使用数字及字母的组合")
+            return false
+        }
+        return true
+    }
+
+    @JvmStatic
+    fun isCodeCorrect(inputText: String) : Boolean {
+        var code = inputText
+        if (TextUtils.isEmpty(code) || code.length < 6) {
             return false
         }
         return true

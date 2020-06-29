@@ -7,11 +7,10 @@ package com.wireguard.android.alActivity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.view.View
+import android.text.InputType
+
 import android.widget.Toast
 import com.kaopiz.kprogresshud.KProgressHUD
-
 
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
@@ -41,11 +40,11 @@ class AliLoginActivity : AliBaseActivity() {
 
     private var pageState:String =  PAGE_STATE_SIGN_IN// 1: free trial 2: sign in
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.ali_login_activity)
         initData()
+        initListener()
     }
     override fun getLayoutId(): Int {
         return R.layout.ali_login_activity;
@@ -58,88 +57,62 @@ class AliLoginActivity : AliBaseActivity() {
         AppConfigData.deviceId = deviceId
         AppConfigData.deviceBrand = deviceBrand
 
-        var value = intent.getStringExtra("PARAM_FROM")
-        pageState = value
-        if (value == PAGE_STATE_FREE_TRIAL) {  //试玩
-            setTile("Free trial")
-            bt_login.text =  getString(R.string.create_account)
-            tv_forget_password.visibility = View.GONE
-        } else if (value == PAGE_STATE_SIGN_IN) { //登录
-            setTile("Sign in")
-            bt_login.text =  getString(R.string.sign_in)
-            tv_forget_password.visibility = View.VISIBLE
-            val lastUserName = AppConfigData.loginName
-            if (lastUserName != null && lastUserName.length > 1 ) {
-                et_user_name.setText(lastUserName)
+        setHasBackArrow(false)
+        setTile("login")
+        //var value = intent.getStringExtra("PARAM_FROM")
+        //pageState = value
+
+    }
+
+    private fun initListener() {
+
+        ck_pwd_show.setOnCheckedChangeListener { _, isChecked ->
+            when(isChecked) {
+                true -> {
+                    et_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)
+                }
+                false -> {
+                    et_password.setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                }
             }
         }
 
-        tv_new_user.setOnClickListener {
-            bt_login.text =  getString(R.string.sign_in)
+        tv_register.setOnClickListener {
+            var intent = Intent(this,AliRegistActivity::class.java)
+            startActivity(intent)
         }
+        tv_forget_password.setOnClickListener {
+            var intent = Intent(this, AliForgetPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
         bt_login.setOnClickListener {
 
             val username = et_user_name.text.toString().toLowerCase().trim()
             val password = et_password.text.toString().toLowerCase().trim()
 
-            val isCheckUserName =  Utils.checkStringUsername(username)
+
+            var isCheckUserName =  Utils.checkStringUsername(username)
             val isCheckPassword =  Utils.isPasswordCorrect(password)
-
+            if (username.length < 3) {
+                isCheckUserName = false
+            }
             if (!isCheckUserName){
-
-                Toast.makeText(this, "用户名不符合规则，请重新输入", Toast.LENGTH_SHORT)
+                ToastUtils.show("用户名不符合规则，请重新输入")
             }
             if (!isCheckPassword) {
                 Toast.makeText(this, "密码不符合规则，请重新输入", Toast.LENGTH_SHORT)
             }
 
             if (isCheckUserName && isCheckPassword) {
-                if (value == PAGE_STATE_FREE_TRIAL) {  //试玩
-                    register(username,password)
-                } else if ( value == PAGE_STATE_SIGN_IN) { //登录
-                    login(username,password)
-                }
+                login(username,password)
             }
-
-
-                /* if (username.length < 5) {
-                     Toast.makeText(this,"用户名要大于等于5位以上的字母",Toast.LENGTH_SHORT)
-                     return@setOnClickListener
-                 }
-                 if (password.length < 5) {
-                     Toast.makeText(this,"密码要大于等于5位以上的字母和数字",Toast.LENGTH_SHORT)
-                     return@setOnClickListener
-                 } */
-
         }
-    }
 
-    private fun register(username:String, password:String) {
 
-        val request = UsernameLoginRequest()
-        request.deviceBrand = AppConfigData.deviceBrand
-        request.deviceId = AppConfigData.deviceId
-        request.username = username
-        request.password = Utils.md5Encode(password)
-        ApiClient.instance.service.register(request)
-                .compose(NetworkScheduler.compose())
-                .bindUntilEvent(this,ActivityEvent.DESTROY)
-                .subscribe(object : ApiResponse<LoginResponse>(this,true){
-                    override fun businessFail(data: LoginResponse) {
-                        ToastUtils.show(data.message ?: "")
-                    }
-                    override fun businessSuccess(data: LoginResponse) {
-                        if (data.data != null) {
-                            goSuccess(data)
-                        }
-                    }
-                    override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
-                        if (this == null)
-                             Toast.makeText(this, apiErrorModel.message, Toast.LENGTH_SHORT)
-                    }
-                })
 
     }
+
 
     private fun login(username:String, password:String) {
 
@@ -161,15 +134,13 @@ class AliLoginActivity : AliBaseActivity() {
                         }
                     }
                     override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
-                        if (this == null)
-                            Toast.makeText(this, apiErrorModel.message, Toast.LENGTH_SHORT)                    }
+                        if (this != null) {
+                            ToastUtils.show(apiErrorModel.message)
+                        }                    }
                 })
 
     }
 
-    private fun loginByToken() {
-
-    }
 
     private fun goSuccess(data:LoginResponse) {
 
@@ -179,7 +150,7 @@ class AliLoginActivity : AliBaseActivity() {
         AppConfigData.password = data.data.password
         AppConfigData.loginToken = data.data.token
 
-        intent.setClass(this,AliMainActivity::class.java)
+        var intent = intent.setClass(this,AliMainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()

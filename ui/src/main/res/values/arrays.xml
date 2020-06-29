@@ -8,6 +8,46 @@
         <item>@mipmap/icon_loading0</item>
         <item>@mipmap/icon_loading1</item>
     </array>
+    <array name="connecting">
+        <item>@mipmap/icon_connect00</item>
+        <item>@mipmap/icon_connect01</item>
+        <item>@mipmap/icon_connect02</item>
+        <item>@mipmap/icon_connect03</item>
+        <item>@mipmap/icon_connect04</item>
+        <item>@mipmap/icon_connect05</item>
+        <item>@mipmap/icon_connect06</item>
+        <item>@mipmap/icon_connect07</item>
+        <item>@mipmap/icon_connect08</item>
+        <item>@mipmap/icon_connect09</item>
+        <item>@mipmap/icon_connect10</item>
+        <item>@mipmap/icon_connect11</item>
+        <item>@mipmap/icon_connect12</item>
+        <item>@mipmap/icon_connect13</item>
+        <item>@mipmap/icon_connect14</item>
+        <item>@mipmap/icon_connect15</item>
+        <item>@mipmap/icon_connect16</item>
+        <item>@mipmap/icon_connect17</item>
+        <item>@mipmap/icon_connect18</item>
+        <item>@mipmap/icon_connect19</item>
+        <item>@mipmap/icon_connect20</item>
+        <item>@mipmap/icon_connect21</item>
+        <item>@mipmap/icon_connect22</item>
+        <item>@mipmap/icon_connect23</item>
+        <item>@mipmap/icon_connect24</item>
+        <item>@mipmap/icon_connect25</item>
+        <item>@mipmap/icon_connect26</item>
+        <item>@mipmap/icon_connect27</item>
+        <item>@mipmap/icon_connect28</item>
+        <item>@mipmap/icon_connect29</item>
+        <item>@mipmap/icon_connect30</item>
+        <item>@mipmap/icon_connect31</item>
+        <item>@mipmap/icon_connect32</item>
+        <item>@mipmap/icon_connect33</item>
+        <item>@mipmap/icon_connect34</item>
+        <item>@mipmap/icon_connect35</item>
+        <item>@mipmap/icon_connect36</item>
+        <item>@mipmap/icon_connect37</item>
+    </array>
     <array name="set_title">
         <item>通知设置</item>
         <item>反馈建议</item>

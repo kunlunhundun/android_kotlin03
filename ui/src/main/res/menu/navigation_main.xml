@@ -7,14 +7,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:id="@+id/main"
         android:checkableBehavior="single">
-        <item android:id="@+id/profiles"
-            android:title="@string/profiles"
-            android:icon="@mipmap/icon_menu_set"/>
+        <item android:id="@+id/share_friends"
+            android:title="@string/share_friends"
+            android:icon="@mipmap/icon_sidebar_friends"/>
         <item android:id="@+id/account"
             android:title="Account"
             android:icon="@mipmap/icon_menu_account"/>
-        <item android:id="@+id/globalSettings"
-            android:title="Language"
-            android:icon="@mipmap/icon_menu_language"/>
+
     </group>
 </menu>
