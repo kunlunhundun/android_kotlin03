@@ -11,7 +11,7 @@ install {
             packaging 'aar'
             groupId groupName
             artifactId 'tunnel'
-            version wireguardVersionName
+            version versionName
 
             licenses {
                 license {
@@ -47,7 +47,7 @@ bintray {
         publish = true
 
         version {
-            name = wireguardVersionName
+            name = versionName
         }
     }
 }
@@ -58,7 +58,7 @@ android.libraryVariants.all { variant ->
             source = variant.javaCompileProvider.get().source
             classpath = files((android.bootClasspath.join(File.pathSeparator)))
             classpath += variant.javaCompileProvider.get().classpath
-            title = 'Embeddable WireGuard Tunnel for Android v$wireguardVersionName'
+            title = 'Embeddable WireGuard Tunnel for Android v$versionName'
         }
         task javadocJar(type: Jar, dependsOn: javadoc) {
             archiveClassifier = 'javadoc'

@@ -89,7 +89,7 @@
     <string name="allow_remote_control_intents_summary_on">Zunanje aplikacije lahko preklapljajo tunele (napredno)</string>
     <string name="allow_remote_control_intents_title">Dovoljeno upravljanje preko zunanjih aplikacij</string>
     <string name="allowed_ips">Dovoljeni naslovi IP</string>
-    <string name="app_name">sirius</string>
+    <string name="app_name">Sirius VPN</string>
     <string name="bad_config_context">%1$s-ov %2$s</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_error">%1$s v %2$s</string>

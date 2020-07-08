@@ -10,9 +10,9 @@
         <item android:id="@+id/share_friends"
             android:title="@string/share_friends"
             android:icon="@mipmap/icon_sidebar_friends"/>
-        <item android:id="@+id/account"
-            android:title="Account"
-            android:icon="@mipmap/icon_menu_account"/>
+        <item android:id="@+id/update_app"
+            android:title="Update"
+            android:icon="@mipmap/icon_sidebar_update"/>
 
     </group>
 </menu>

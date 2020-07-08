@@ -50,7 +50,7 @@
     <string name="allow_remote_control_intents_summary_on">外部アプリにトンネルの制御を許可(上級者向け)</string>
     <string name="allow_remote_control_intents_title">外部アプリからの制御</string>
     <string name="allowed_ips">Allowed IPs</string>
-    <string name="app_name">sirius</string>
+    <string name="app_name">Sirius VPN</string>
     <string name="bad_config_context">%1$s の %2$s</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_error">%2$s 中の %1$s</string>

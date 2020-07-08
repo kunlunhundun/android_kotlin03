@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="settings">
-    <com.wireguard.android.preference.VersionPreference
+    <com.sunblackhole.android.preference.VersionPreference
         android:icon="@mipmap/ic_launcher"
         android:key="version" />
     <CheckBoxPreference
@@ -10,7 +10,7 @@
         android:summaryOff="@string/restore_on_boot_summary_off"
         android:summaryOn="@string/restore_on_boot_summary_on"
         android:title="@string/restore_on_boot_title" />
-    <com.wireguard.android.preference.ZipExporterPreference android:key="zip_exporter" />
+    <com.sunblackhole.android.preference.ZipExporterPreference android:key="zip_exporter" />
     <Preference
         android:key="log_viewer"
         android:summary="@string/log_viewer_pref_summary"
@@ -27,9 +27,9 @@
         android:summaryOff="@string/multiple_tunnels_summary_off"
         android:summaryOn="@string/multiple_tunnels_summary_on"
         android:title="@string/multiple_tunnels_title" />
-    <com.wireguard.android.preference.ModuleDownloaderPreference android:key="module_downloader" />
-    <com.wireguard.android.preference.ToolsInstallerPreference android:key="tools_installer" />
-    <com.wireguard.android.preference.KernelModuleDisablerPreference android:key="kernel_module_disabler" />
+    <com.sunblackhole.android.preference.ModuleDownloaderPreference android:key="module_downloader" />
+    <com.sunblackhole.android.preference.ToolsInstallerPreference android:key="tools_installer" />
+    <com.sunblackhole.android.preference.KernelModuleDisablerPreference android:key="kernel_module_disabler" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="allow_remote_control_intents"

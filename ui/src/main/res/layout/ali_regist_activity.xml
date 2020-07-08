@@ -75,12 +75,27 @@
             android:textSize="14sp"
             />
 
+        <Button
+            android:id="@+id/btn_get_code"
+            android:layout_width="100dp"
+            android:layout_height="28dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/text_blue_color"
+            android:text="Get code"
+            android:textColor="@color/white"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_email_regist_code"
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_marginRight="0dp"
+            android:visibility="gone"
             android:background="@color/bg_light_white_color"
             app:layout_constraintRight_toRightOf="parent"
             >
@@ -128,7 +143,7 @@
             android:drawablePadding="10dp"
             android:paddingLeft="8dp"
             android:gravity="center_vertical"
-            android:hint="Password"
+            android:hint="Use 6 or more characters for password"
             android:singleLine="true"
             android:textColor="#000000"
             android:textColorHint="#a3a3a3"

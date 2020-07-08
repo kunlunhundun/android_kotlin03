@@ -7,15 +7,15 @@
 
         <import type="android.view.View" />
 
-        <import type="com.wireguard.android.model.ApplicationData" />
+        <import type="com.sunblackhole.android.model.ApplicationData" />
 
         <variable
             name="fragment"
-            type="com.wireguard.android.fragment.AppListDialogFragment" />
+            type="com.sunblackhole.android.fragment.AppListDialogFragment" />
 
         <variable
             name="appData"
-            type="com.wireguard.android.databinding.ObservableKeyedArrayList&lt;String, ApplicationData&gt;" />
+            type="com.sunblackhole.android.databinding.ObservableKeyedArrayList&lt;String, ApplicationData&gt;" />
     </data>
 
     <LinearLayout

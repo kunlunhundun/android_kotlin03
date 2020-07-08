@@ -99,7 +99,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="18dp"
         android:text="@string/register"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textColor="@color/white"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/cl_pass_word"
@@ -114,7 +114,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="18dp"
         android:text="@string/forgot_password"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textColor="@color/white"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/cl_pass_word"
@@ -138,5 +138,15 @@
         >
     </Button>
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button_fb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bt_login"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

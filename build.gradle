@@ -31,7 +31,7 @@ buildscript {
         threetenabpVersion = '1.2.4'
         zxingEmbeddedVersion = '3.6.0'
 
-        groupName = 'com.wireguard.android'
+        groupName = 'com.sunblackhole.android'
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${agpVersion}"

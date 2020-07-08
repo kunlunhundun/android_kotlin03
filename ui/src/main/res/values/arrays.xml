@@ -48,6 +48,24 @@
         <item>@mipmap/icon_connect36</item>
         <item>@mipmap/icon_connect37</item>
     </array>
+    <array name="disconnect">
+        <item>@mipmap/icon_disconnect00</item>
+        <item>@mipmap/icon_disconnect01</item>
+        <item>@mipmap/icon_disconnect02</item>
+        <item>@mipmap/icon_disconnect03</item>
+        <item>@mipmap/icon_disconnect04</item>
+        <item>@mipmap/icon_disconnect05</item>
+        <item>@mipmap/icon_disconnect06</item>
+        <item>@mipmap/icon_disconnect07</item>
+        <item>@mipmap/icon_disconnect08</item>
+        <item>@mipmap/icon_disconnect09</item>
+        <item>@mipmap/icon_disconnect10</item>
+        <item>@mipmap/icon_disconnect11</item>
+        <item>@mipmap/icon_disconnect12</item>
+        <item>@mipmap/icon_disconnect13</item>
+        <item>@mipmap/icon_disconnect14</item>
+    </array>
+
     <array name="set_title">
         <item>通知设置</item>
         <item>反馈建议</item>

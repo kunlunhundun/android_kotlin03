@@ -89,7 +89,7 @@
     <string name="allow_remote_control_intents_summary_on">Сторонние приложения могут переключать туннели (дополнительно)</string>
     <string name="allow_remote_control_intents_title">Доступ к другим приложениям</string>
     <string name="allowed_ips">Разрешенные IP-адреса</string>
-    <string name="app_name">sirius</string>
+    <string name="app_name">Sirius VPN</string>
     <string name="bad_config_context">%1$s из %2$s</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_error">%1$s в %2$s</string>

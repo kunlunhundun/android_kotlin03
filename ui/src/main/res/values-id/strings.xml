@@ -24,7 +24,7 @@
     <string name="allow_remote_control_intents_summary_on">Apl eksternal dapat mengalihkan terowongan (lanjutan)</string>
     <string name="allow_remote_control_intents_title">Izinkan apl kendali jarak jauh</string>
     <string name="allowed_ips">IP diizinkan</string>
-    <string name="app_name">sirius</string>
+    <string name="app_name">Sirius VPN</string>
     <string name="bad_config_context">%1$s %2$s</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_error">%1$s di %2$s</string>

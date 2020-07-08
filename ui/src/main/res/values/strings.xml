@@ -11,11 +11,14 @@
     <string name="share_friends">Tell your friends</string>
 
 
-    <string name="register">Register</string>
+    <string name="register">Register account</string>
     <string name="login">Login</string>
     <string name="reset_password">Reset your password</string>
     <string name="forgot_password">Forgot password</string>
 
+
+    <string name="facebook_app_id">692606934856557</string>
+    <string name="fb_login_protocol_scheme">fb692606934856557</string>
 
     <!-- Strings related to dataGather -->
     <string name="hybrid_net_no">无网络</string>
@@ -95,7 +98,7 @@
     <string name="allow_remote_control_intents_summary_on">External apps may toggle tunnels (advanced)</string>
     <string name="allow_remote_control_intents_title">Allow remote control apps</string>
     <string name="allowed_ips">Allowed IPs</string>
-    <string name="app_name">sirius-tt</string>
+    <string name="app_name">Sirius VPN</string>
     <string name="bad_config_context">%1$s\'s %2$s</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_error">%1$s in %2$s</string>
