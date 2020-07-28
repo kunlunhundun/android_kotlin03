@@ -3,7 +3,9 @@ package com.sunblackhole.android.alActivity
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.widget.Button
 import androidx.core.content.ContextCompat
+import com.crashlytics.android.Crashlytics
 import com.hjq.toast.ToastUtils
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
@@ -93,9 +95,9 @@ class AliRegistActivity : AliBaseActivity() {
             if (!ischeckEmail) {
                 ToastUtils.show("invalid email address")
             } else if (!ischeckPassword) {
-                ToastUtils.show("Use 6 or more characters(combination of letters,numbers)")
+                ToastUtils.show("Enter a combination of at least 6 numbers and letters.")
             } else if (!ischeckCode) {
-                ToastUtils.show("Use 6 numbers code")
+                ToastUtils.show("Please input verification code")
             } else if (ischeckEmail && ischeckPassword && ischeckCode) {
                 register(email,password,code)
             }
@@ -134,7 +136,7 @@ class AliRegistActivity : AliBaseActivity() {
                         ToastUtils.show(data.message ?: "")
                     }
                     override fun businessSuccess(data: BaseResponseObject) {
-                        ToastUtils.show("验证码已经发送")
+                        ToastUtils.show("We've sent a verification code to your email address.\n ")
                         mTimer.start()
                     }
                     override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {

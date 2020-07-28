@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit
 import okhttp3.*
 //import org.litepal.crud.DataSupport.isExist
 import java.nio.charset.Charset
+import javax.net.ssl.HttpsURLConnection
 
 class ApiClient private constructor() {
 
@@ -60,10 +61,13 @@ class ApiClient private constructor() {
                 ))
                 .sslSocketFactory(SSLSocketFactoryUtil.createSSLSocketFactory())
                 .addNetworkInterceptor(rewriteCacheControlInterceptor)
+                .hostnameVerifier( SSLSocketFactoryUtil.TrustAllHostnameVerifier())
                 .addInterceptor(baseInterceptor)
                // .addInterceptor(simulateResponseInterceptor)
                 .addInterceptor(SignInterceptor())
                 .build()
+
+
 
         val retrofit = Retrofit.Builder()
                 .baseUrl(AppConfigData.runGateUrl)

@@ -7,6 +7,8 @@ package com.sunblackhole.android.alActivity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
@@ -107,54 +109,20 @@ class AliAppFilterActivity : AliBaseActivity() {
         appFilterAdpater?.setDataList(mListData)
     }
 
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            backEvent()
+            false
+        } else {
+            super.onKeyDown(keyCode, event);
+        }
+    }
+
     private fun initListener() {
 
          setBackListener(View.OnClickListener {
 
-             if (selectAppType == AppItemType.EXCLUDE) {
-                 var appNameList: ArrayList<String> = ArrayList()
-                 mListData.forEach {
-                     appNameList.add(it.name!!)
-                 }
-                 val nameListStr =  Gson().toJson(appNameList)
-                 val cacheName = Application.getAcache().getAsString(CACHE_EXCCLUDE_DATA)
-                 if (nameListStr != cacheName){
-                     Application.get().isNeedConnectByModifyAppFlag = true
-                 }
-                  Application.getAcache().put(CACHE_EXCCLUDE_DATA, nameListStr)
-             } else if (selectAppType == AppItemType.INCLUDE) {
-
-                 var appNameList: ArrayList<String> = ArrayList()
-                 mListData.forEach {
-                     appNameList.add(it.name!!)
-                 }
-                 val nameListStr =  Gson().toJson(appNameList)
-                 val cacheName = Application.getAcache().getAsString(CACHE_INCLUDE_DATA)
-                 if (nameListStr != cacheName){
-                     Application.get().isNeedConnectByModifyAppFlag = true
-                 }
-                 Application.getAcache().put(CACHE_INCLUDE_DATA, nameListStr)
-             }
-             var lastSelect = Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
-
-             if (originalAppFlag  == 1) {
-                if (lastSelect.toInt() != 1) {
-                    Application.get().isNeedConnectByModifyAppFlag = true
-                    EventBus.getDefault().post(ReconnectTunnelEvent())
-                }
-             } else {
-                if ( Application.get().isNeedConnectByModifyAppFlag == true) {
-                    EventBus.getDefault().post(ReconnectTunnelEvent())
-                }
-             }
-
-             val resultIntent = Intent()
-             val bundle = Bundle()
-             bundle.putString("key_select_app", "result")
-             resultIntent.putExtras(bundle)
-             this.setResult(FILTER_RESULT_OK, resultIntent)
-             finish()
-
+             backEvent()
          })
         cl_add_app.setOnClickListener {
 
@@ -199,6 +167,53 @@ class AliAppFilterActivity : AliBaseActivity() {
             ck_exclude_app_choose.isChecked = false
             ck_include_app_choose.isChecked = true
         }
+    }
+
+
+    private fun backEvent() {
+
+        if (selectAppType == AppItemType.EXCLUDE) {
+            var appNameList: ArrayList<String> = ArrayList()
+            mListData.forEach {
+                appNameList.add(it.name!!)
+            }
+            val nameListStr =  Gson().toJson(appNameList)
+            val cacheName = Application.getAcache().getAsString(CACHE_EXCCLUDE_DATA)
+            if (nameListStr != cacheName){
+                Application.get().isNeedConnectByModifyAppFlag = true
+            }
+            Application.getAcache().put(CACHE_EXCCLUDE_DATA, nameListStr)
+        } else if (selectAppType == AppItemType.INCLUDE) {
+
+            var appNameList: ArrayList<String> = ArrayList()
+            mListData.forEach {
+                appNameList.add(it.name!!)
+            }
+            val nameListStr =  Gson().toJson(appNameList)
+            val cacheName = Application.getAcache().getAsString(CACHE_INCLUDE_DATA)
+            if (nameListStr != cacheName){
+                Application.get().isNeedConnectByModifyAppFlag = true
+            }
+            Application.getAcache().put(CACHE_INCLUDE_DATA, nameListStr)
+        }
+        var lastSelect = Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
+
+        if (originalAppFlag  == 1) {
+            if (lastSelect.toInt() != 1) {
+                Application.get().isNeedConnectByModifyAppFlag = true
+                EventBus.getDefault().post(ReconnectTunnelEvent())
+            }
+        } else {
+            if ( Application.get().isNeedConnectByModifyAppFlag == true) {
+                EventBus.getDefault().post(ReconnectTunnelEvent())
+            }
+        }
+        val resultIntent = Intent()
+        val bundle = Bundle()
+        bundle.putString("key_select_app", "result")
+        resultIntent.putExtras(bundle)
+        this.setResult(FILTER_RESULT_OK, resultIntent)
+        finish()
     }
 
     fun initView() {

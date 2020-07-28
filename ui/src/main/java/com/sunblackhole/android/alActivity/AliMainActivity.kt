@@ -9,11 +9,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.DialogFragment
+import com.hjq.toast.ToastUtils
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
@@ -28,7 +28,6 @@ import com.sunblackhole.android.aliData.net.ApiResponse
 import com.sunblackhole.android.aliData.net.NetworkScheduler
 import com.sunblackhole.android.aliData.response.WireguardListResponse
 
-import com.sunblackhole.android.alutils.ToastUtils
 import com.sunblackhole.android.util.SingleInstanceActivity
 import kotlinx.android.synthetic.main.ali_main_activity.*
 

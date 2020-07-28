@@ -10,15 +10,33 @@
         android:id="@+id/ali_toolbar"
         layout="@layout/ali_custom_toolbar"/>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_message"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smt_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/white"
-        android:cacheColorHint="@color/transparent"
+        app:srlAccentColor="#00000000"
+        app:srlPrimaryColor="@color/bg_light_white_color"
+        app:srlEnablePreviewInEditMode="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ali_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/ali_toolbar"
+        >
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:cacheColorHint="@color/transparent"
+            />
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

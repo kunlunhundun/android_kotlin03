@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="facebook_app_id">267288984555503</string>
+    <string name="fb_login_protocol_scheme">fb267288984555503</string>
+
     <string name="profiles">Profiles</string>
     <string name="settingsxx">Settings</string>
     <string name="faq">FAQ</string>
@@ -8,17 +11,13 @@
     <string name="about">About</string>
     <string name="about_title">sirius %s</string>
     <string name="subscriptions">Subscriptions</string>
-    <string name="share_friends">Tell your friends</string>
+    <string name="share_friends">Shares</string>
 
 
     <string name="register">Register account</string>
     <string name="login">Login</string>
     <string name="reset_password">Reset your password</string>
     <string name="forgot_password">Forgot password</string>
-
-
-    <string name="facebook_app_id">692606934856557</string>
-    <string name="fb_login_protocol_scheme">fb692606934856557</string>
 
     <!-- Strings related to dataGather -->
     <string name="hybrid_net_no">无网络</string>
@@ -29,10 +28,12 @@
     <string name="hybrid_net_unkonw">未知网络状态</string>
     <string name="service_error">服务器出错</string>
     <string name="not_found">请求的资源不存在</string>
-    <string name="timeout">请求超时</string>
+    <string name="timeout">time out</string>
     <string name="unexpected_error"></string>
     <string name="unknown_host_error">无法访问该域名</string>
-    <string name="network_wrong">您当前的网络连接有问题，请尝试重新连接网络</string>
+    <string name="network_wrong222">您当前的网络连接有问题，请尝试重新连接网络</string>
+    <string name="network_wrong">There is a problem with your current network connection, please try to reconnect to the network
+</string>
 
 
     <plurals name="delete_error">

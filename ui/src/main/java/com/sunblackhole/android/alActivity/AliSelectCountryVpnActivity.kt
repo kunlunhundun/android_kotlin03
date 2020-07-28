@@ -29,15 +29,13 @@ class AliSelectCountryVpnActivity : AliBaseActivity() {
     }
 
     fun initView() {
-        setTile("VPN locations")
+        setTile("VPN Locations")
         var vpnPointModel = VpnPointModel("icon_china_flag","china")
-        var vpnPointModel1 = VpnPointModel("icon_china_flag","USA")
-
       //  mListData.add(vpnPointModel)
 
         if (AppConfigData.wireguardList != null) {
             for (item in AppConfigData.wireguardList!!) {
-                var model = VpnPointModel("icon_china_flag","china")
+                var model = VpnPointModel("icon_usa_flag",item.lineName!!)
                 when {
                     (item.lineName!!.toLowerCase().contains("usa") == true) -> {
                         model = VpnPointModel("icon_usa_flag",item.lineName!!)
@@ -45,15 +43,72 @@ class AliSelectCountryVpnActivity : AliBaseActivity() {
                     (item.lineName!!.toLowerCase().contains("indonesia") == true) -> {
                         model = VpnPointModel("icon_indonesia_flag",item.lineName!!)
                     }
-                    (item.lineName!!.toLowerCase().contains("india") == true) -> {
-                        model = VpnPointModel("icon_india_flag",item.lineName!!)
-                    }
                     (item.lineName!!.toLowerCase().contains("hong kong") == true) -> {
                         model = VpnPointModel("icon_hk_flag",item.lineName!!)
                     }
+                    (item.lineName!!.toLowerCase().contains("japan") == true) -> {
+                        model = VpnPointModel("icon_japan_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("uk") == true) -> {
+                        model = VpnPointModel("icon_england_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("germany") == true) -> {
+                        model = VpnPointModel("icon_germany_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("india") == true) -> {
+                        model = VpnPointModel("icon_india_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("korea") == true) -> {
+                        model = VpnPointModel("icon_korea_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("france") == true) -> {
+                        model = VpnPointModel("icon_french_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("singapore") == true) -> {
+                        model = VpnPointModel("icon_singapore_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("russia") == true) -> {
+                        model = VpnPointModel("icon_russian_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("sweden") == true) -> {
+                        model = VpnPointModel("icon_sweden_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("switzerland") == true) -> {
+                        model = VpnPointModel("icon_switzerland_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("turkey") == true) -> {
+                        model = VpnPointModel("icon_turkey_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("italy") == true) -> {
+                        model = VpnPointModel("icon_italy_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("finland") == true) -> {
+                        model = VpnPointModel("icon_finland_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("luxembourg") == true) -> {
+                        model = VpnPointModel("icon_luxembourg_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("taiwan") == true) -> {
+                        model = VpnPointModel("icon_china_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("saudiarabia") == true) -> {
+                        model = VpnPointModel("icon_saudiarabia_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("australia") == true) -> {
+                        model = VpnPointModel("icon_australia_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("canada") == true) -> {
+                        model = VpnPointModel("icon_canada_flag",item.lineName!!)
+                    }
+                    (item.lineName!!.toLowerCase().contains("netherlands") == true ||
+                            item.lineName!!.toLowerCase().contains("holland") == true ) -> {
+                        model = VpnPointModel("icon_netherlands_flag",item.lineName!!)
+                    }
+                    //
                     (item.lineName!!.toLowerCase().contains("china") == true) -> {
                         model = VpnPointModel("icon_china_flag",item.lineName!!)
                     }
+                    //SaudiArabia
                 }
                 mListData.add(model)
             }

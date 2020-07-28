@@ -20,7 +20,7 @@ class MessageAdapter (mListDada: ArrayList<MessageObj>) : RecyclerView.Adapter<R
         return MessageHolder(view)
     }
 
-    public fun  setDataList(list: ArrayList<MessageObj>) {
+     fun  setDataList(list: ArrayList<MessageObj>) {
         mList =  list
         notifyDataSetChanged()
     }
@@ -40,12 +40,27 @@ class MessageAdapter (mListDada: ArrayList<MessageObj>) : RecyclerView.Adapter<R
             holder.tv_username.text = AppConfigData.loginName
             holder.tv_answer.text = "We have received your message. We will replay you as soon as possible. Thank you!"
             holder.cl_answer.visibility = View.VISIBLE
-           /* if (model.officialReplyList?.size ?: 0 > 0) {
-                holder.tv_answer.text = model.officialReplyList?.get(0)?.content
-                holder.cl_answer.visibility = View.VISIBLE
-            } else {
-                holder.cl_answer.visibility = View.GONE
-            } */
+            if (model.comment?.createTime != null) {
+                var creatTime = model.comment?.createTime
+                var newTime =  creatTime.toString().replace("T"," ").replace(".000+0000","")
+                holder.tv_time.text = newTime
+            }
+            if (model.officialReplyList?.size ?: 0 > 0) {
+                var content = ""
+                var size = model.officialReplyList?.size
+                var  i = 0;
+                model.officialReplyList?.forEach {
+                    var enter = "\n"
+                    i++
+                    if (i==size) {
+                        enter = ""
+                    }
+                   content = content +  it.content + enter
+                }
+
+                holder.tv_answer.text = content
+
+            }
         }
     }
 

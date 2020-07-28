@@ -31,6 +31,7 @@ class ShareToFriendsDialog : DialogFragment(){
     private var iv_faceBook:ImageView? = null
     private var iv_whatsapp:ImageView? = null
     private var iv_instagram:ImageView? = null
+    private val content = " Sirius VPN, come with me! https://play.google.com/store/apps/details?id=com.sunblackhole.android"
 
     override fun onStart() {
         super.onStart()
@@ -61,13 +62,13 @@ class ShareToFriendsDialog : DialogFragment(){
 
         iv_sms?.setOnClickListener {
 
-            shareToApp("https://www.google.com/","com.android.mms")
+            shareToApp(content,"com.android.mms")
         }
 
         iv_faceBook?.setOnClickListener {
 
             if (appInstalledOrNot("com.facebook.katana")) {
-                shareToApp("https://www.google.com/","com.facebook.katana")
+                shareToApp(content,"com.facebook.katana")
             } else {
                 ToastUtils.show("please install facebook first")
             }
@@ -76,7 +77,7 @@ class ShareToFriendsDialog : DialogFragment(){
         iv_whatsapp?.setOnClickListener {
 
             if (appInstalledOrNot("com.whatsapp")) {
-                shareToApp("https://www.google.com/", "com.whatsapp")
+                shareToApp(content, "com.whatsapp")
             }else {
                 ToastUtils.show("please install whatsapp first")
 
@@ -86,7 +87,7 @@ class ShareToFriendsDialog : DialogFragment(){
         iv_instagram?.setOnClickListener {
 
             if (appInstalledOrNot("com.instagram.android")) {
-                shareToApp("https://www.google.com/","com.instagram.android")
+                shareToApp(content,"com.instagram.android")
             }else {
                 ToastUtils.show("please install instagram first")
             }
@@ -115,13 +116,12 @@ class ShareToFriendsDialog : DialogFragment(){
             shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
             shareIntent.setType("image/*");
 
-            copyText("link","https://www.google.com/")
+            copyText("link",content)
            // var imagePath = Environment.getExternalStorageDirectory() + File.separator + "test.jpg";
             //由文件得到uri
           //  Uri imageUri = Uri.fromFile(new File(imagePath));
-
         }
-        shareIntent.putExtra(Intent.EXTRA_TEXT,"https://www.google.com/");	//设置要分享的内容
+        shareIntent.putExtra(Intent.EXTRA_TEXT,content);	//设置要分享的内容
         shareIntent.setPackage(packageName) //("com.instagram.android")
         startActivity(shareIntent)
     }

@@ -16,8 +16,13 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hjq.toast.ToastUtils
 import com.sunblackhole.android.Application
 import com.sunblackhole.android.Application.Companion.CACHE_ALLOW_APP_FLAG
@@ -38,6 +43,7 @@ import com.sunblackhole.android.aliData.net.ApiErrorModel
 import com.sunblackhole.android.aliData.net.ApiResponse
 import com.sunblackhole.android.aliData.net.NetworkScheduler
 import com.sunblackhole.android.aliData.response.BaseResponseObject
+import com.sunblackhole.android.aliData.response.QueryReplyCountResponse
 import com.sunblackhole.android.aliData.response.WireguardListResponse
 import com.sunblackhole.android.alutils.FrameAnimation
 import com.sunblackhole.android.alutils.LogUtils
@@ -49,9 +55,9 @@ import com.sunblackhole.android.util.ErrorMessages
 import com.sunblackhole.config.Config
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
-import kotlinx.android.synthetic.main.ali_custom_toolbar.*
-import kotlinx.android.synthetic.main.ali_custom_toolbar.view.*
-import kotlinx.android.synthetic.main.ali_tunnel_connect_fragment.*
+//import kotlinx.android.synthetic.main.ali_custom_toolbar.*
+//import kotlinx.android.synthetic.main.ali_custom_toolbar.view.*
+//import kotlinx.android.synthetic.main.ali_tunnel_connect_fragment.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -68,12 +74,29 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
 
     private var frameAnimation: FrameAnimation? = null
     private var disconnectFrameAnimation: FrameAnimation? = null
-
     private var isConnecting: Boolean = false
     private var isLocked: Boolean = false
 
     private var curWireguardData: WireguardListResponse.VpnServiceObject? = null
     private var homeAppAdapter: HomeAppAdapter? = null
+
+    private var toolbarTitle: TextView? = null
+    private var toolbarIcon: ImageView? = null
+    private var ivHomeIcon: ImageView? = null
+
+    private var rv_app_home_item: RecyclerView? = null
+    private var cl_select_app: ConstraintLayout? = null
+    private var iv_tunnel_connect: ImageView? = null
+    private var cl_select_line: ConstraintLayout? = null
+    private var img_msg: ImageView? = null
+    private var tv_line_name: TextView? = null
+    private var iv_country_flag: ImageView? = null
+    private var tv_all_app_filter: TextView? = null
+    private var tv_select_app_filter: TextView? = null
+    private var iv_flag_lock: ImageView? = null
+    private var iv_app_lock: ImageView? = null
+    private var iv_home_connect_toast: ImageView? = null
+    private var tv_red_message: TextView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.ali_tunnel_connect_fragment, container, false)
@@ -86,9 +109,28 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
 //        //菜单按钮可用
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_title.text = ""
-        toolbar_icon.visibility = View.GONE
-        toolbar.iv_home_logo.visibility = View.VISIBLE
+
+        toolbarTitle = toolbar.findViewById(R.id.toolbar_title)
+        toolbarIcon = toolbar.findViewById(R.id.toolbar_icon)
+        ivHomeIcon = toolbar.findViewById(R.id.iv_home_logo)
+
+        rv_app_home_item = view.findViewById(R.id.rv_app_home_item)
+        cl_select_app = view.findViewById(R.id.cl_select_app)
+        iv_tunnel_connect = view.findViewById(R.id.iv_tunnel_connect)
+        cl_select_line = view.findViewById(R.id.cl_select_line)
+        img_msg = view.findViewById(R.id.img_msg)
+        tv_line_name = view.findViewById(R.id.tv_line_name)
+        iv_country_flag = view.findViewById(R.id.iv_country_flag)
+        tv_all_app_filter = view.findViewById(R.id.tv_all_app_filter)
+        tv_select_app_filter = view.findViewById(R.id.tv_select_app_filter)
+        iv_flag_lock = view.findViewById(R.id.iv_flag_lock)
+        iv_app_lock = view.findViewById(R.id.iv_app_lock)
+        iv_home_connect_toast = view.findViewById(R.id.iv_home_connect_toast)
+        tv_red_message = view.findViewById(R.id.tv_red_message)
+
+        toolbarTitle?.text = ""
+        toolbarIcon?.visibility = View.GONE
+        ivHomeIcon?.visibility = View.VISIBLE
         toolbar.setNavigationIcon(R.drawable.ic_navigation_menu)
         toolbar.setNavigationOnClickListener { (activity as AliMainActivity).drawer.openDrawer(GravityCompat.START) }
        // toolbar.inflateMenu(R.menu.about_menu)
@@ -108,34 +150,36 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
     }
 
 
+    override fun onResume() {
+        super.onResume()
+
+        queryReplyCount()
+    }
+
     private fun initView() {
 
         var manager = GridLayoutManager(context,6)
-        rv_app_home_item.layoutManager = manager
+        rv_app_home_item?.layoutManager = manager
         var appList = ArrayList<AppPackageModel>()
         homeAppAdapter = HomeAppAdapter(appList)
-        rv_app_home_item.setAdapter(homeAppAdapter)
+        rv_app_home_item?.setAdapter(homeAppAdapter)
 
-
-        rv_app_home_item.setOnTouchListener(OnTouchListener { v, event ->
+        rv_app_home_item?.setOnTouchListener(OnTouchListener { v, event ->
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                cl_select_app.performClick();  //模拟父控件的点击
+                cl_select_app?.performClick();  //模拟父控件的点击
             }
             false
         })
 
-
-
         Handler().postDelayed(Runnable {
             configAPPItem()
         },3000)
-
     }
 
 
     private fun setListener() {
 
-        iv_tunnel_connect.setOnClickListener {
+        iv_tunnel_connect?.setOnClickListener {
 
             if (selectedTunnel == null) {
                 ToastUtils.show("please select line to connect")
@@ -144,24 +188,22 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
             startAndStopWireGuard()
 
         }
-        cl_select_line.setOnClickListener {
+        cl_select_line?.setOnClickListener {
             if (isLocked == true) {
-                ToastUtils.show("it is connecting, please wait ")
                 return@setOnClickListener
             }
             val intent = Intent(context,AliSelectCountryVpnActivity::class.java)
             startActivity(intent)
         }
-        cl_select_app.setOnClickListener {
+        cl_select_app?.setOnClickListener {
 
             if (isLocked == true) {
-                ToastUtils.show("it is connecting, please wait ")
                 return@setOnClickListener
             }
             val intent = Intent(context, AliAppFilterActivity::class.java)
             startActivityForResult(intent, FILTER_RESULT_OK);
         }
-        btn_msg.setOnClickListener {
+        img_msg?.setOnClickListener {
 
             //var intent = Intent(context, AliMessageActivity::class.java)
            // startActivity(intent)
@@ -192,19 +234,14 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
 
     private fun initWireguardData(event:SelectWireguardEvent) {
 
-      /*  val configText = "[Interface]\nPrivateKey = 0HvBmNS79bH8DTehScAsBznDlxRMDNKgShTIN6tYemU=\n" +
-                "Address = 10.77.77.2/32\nDNS = 8.8.8.8\nMTU = 1420\n" +
-                "[Peer]\nPublicKey = fShlhFxOtwwBP5wL8RfvLFloiQL4WkZ6e3e1RYqrAnQ=\nEndpoint = 121.196.120.24:33649\n" +
-                "AllowedIPs = 0.0.0.0/0, ::0/0\nPersistentKeepalive = 25" */
-
         var wireguardData = AppConfigData.wireguardList?.get(event.index)
         if (wireguardData == null) {
             return
         }
         curWireguardData = wireguardData
-        tv_line_name.text = wireguardData.lineName
+        tv_line_name?.text = wireguardData.lineName
         val icon = requireContext().resources.getIdentifier(event.icon_flag, "mipmap", requireContext().packageName)
-        iv_country_flag.setImageResource(icon)
+        iv_country_flag?.setImageResource(icon)
 
         // 断开重连的那种
         val checked = if( selectedTunnel?.getDataState() == Tunnel.State.UP) false else true
@@ -225,8 +262,6 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
         }
 
     }
-
-
 
 
     private fun startConnectWireGuard(wireguardData: WireguardListResponse.VpnServiceObject) {
@@ -286,6 +321,7 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
           //  iv_tunnel_connect.setBackgroundResource(R.mipmap.icon_home_connect)
             disConnectRequest()
         } else if (newState == Tunnel.State.UP) {
+
             //tv_connect_state.text = "connected"
            // connectedRequest()
         }
@@ -296,23 +332,23 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
         LogUtils.e("configAPPItem---->" + appFlag)
 
         if(appFlag.toInt() == 1) {
-            tv_all_app_filter.visibility = View.VISIBLE
-            tv_select_app_filter.visibility = View.GONE
-            rv_app_home_item.visibility = View.GONE
+            tv_all_app_filter?.visibility = View.VISIBLE
+            tv_select_app_filter?.visibility = View.GONE
+            rv_app_home_item?.visibility = View.GONE
             return
         }
-        tv_all_app_filter.visibility = View.GONE
-        tv_select_app_filter.visibility = View.VISIBLE
-        rv_app_home_item.visibility = View.VISIBLE
+        tv_all_app_filter?.visibility = View.GONE
+        tv_select_app_filter?.visibility = View.VISIBLE
+        rv_app_home_item?.visibility = View.VISIBLE
 
         var appname:String = "";
 
         if (appFlag.toInt() == 2) {
-            tv_select_app_filter.text = "Do not allow selected apps to use"
+            tv_select_app_filter?.text = "Do not allow selected apps to use"
             var excludeApps = Application.getExcludeAppList()
             homeAppAdapter?.setDataList(excludeApps)
             for (appItem in excludeApps) {
-                appname = appItem.name + ","
+                appname = appname + appItem.name + ","
             }
             if (appname.length > 1) {
                appname = appname.substring(0,appname.length-1)
@@ -320,17 +356,19 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
             LogUtils.e("excludeApps---->" + excludeApps.count())
         }
         if (appFlag.toInt() == 3) {
-            tv_select_app_filter.text = "Allow selected apps to use"
+            tv_select_app_filter?.text = "Allow selected apps to use"
             var includeApps = Application.getIncludeAppList()
             homeAppAdapter?.setDataList(includeApps)
             for (appItem in includeApps) {
-                appname = appItem.name + ","
+                appname = appname + appItem.name + ","
             }
             if (appname.length > 1) {
                 appname = appname.substring(0,appname.length-1)
             }
             LogUtils.e("includeApps---->" + includeApps.count())
         }
+        LogUtils.e("appname---->" + appname)
+
         filterApp(appFlag.toInt(), appname)
     }
 
@@ -339,14 +377,14 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
        val appFlag =  Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
 
        if(appFlag.toInt() == 1) {
-           tv_all_app_filter.visibility = View.VISIBLE
-           tv_select_app_filter.visibility = View.GONE
-           rv_app_home_item.visibility = View.GONE
+           tv_all_app_filter?.visibility = View.VISIBLE
+           tv_select_app_filter?.visibility = View.GONE
+           rv_app_home_item?.visibility = View.GONE
            return
        }
-       tv_all_app_filter.visibility = View.GONE
-       tv_select_app_filter.visibility = View.VISIBLE
-       rv_app_home_item.visibility = View.VISIBLE
+       tv_all_app_filter?.visibility = View.GONE
+       tv_select_app_filter?.visibility = View.VISIBLE
+       rv_app_home_item?.visibility = View.VISIBLE
 
        if (appFlag.toInt() == 2) {
            var excludeApps = Application.getExcludeAppList()
@@ -354,11 +392,8 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
                applicationsSet.add(it.packageName!!)
            }
            if (applicationsSet.isNotEmpty()) {
-               Thread(Runnable {
-                   // 写子线程中的操作
-                   currentConfig?.`interface`?.excludedApplications?.addAll(applicationsSet)
-               }).start()
-
+               currentConfig?.`interface`?.excludedApplications?.addAll(applicationsSet)
+               LogUtils.e( "excludeApps--->" + applicationsSet.toString())
            }
            homeAppAdapter?.setDataList(excludeApps)
        }
@@ -368,12 +403,11 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
                applicationsSet.add(it.packageName!!)
            }
            if (applicationsSet.isNotEmpty()) {
-               Thread(Runnable {
-                   // 写子线程中的操作
-                   currentConfig?.`interface`?.includedApplications?.addAll(applicationsSet)
-                   var size = currentConfig?.`interface`?.includedApplications?.size
-                   LogUtils.d("size:--->" + size)
-               }).start()
+               // 写子线程中的操作
+               currentConfig?.`interface`?.includedApplications?.addAll(applicationsSet)
+               var size = currentConfig?.`interface`?.includedApplications?.size
+               LogUtils.e( "includeApps--->" + applicationsSet.toString())
+
            }
            homeAppAdapter?.setDataList(includeApps)
        }
@@ -433,26 +467,26 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
             }
             typedArray.recycle()
             LogUtils.e("len------->" + len)
-            frameAnimation =  FrameAnimation(iv_tunnel_connect!!, resId, 100, true)
+            frameAnimation =  FrameAnimation(iv_tunnel_connect!!, resId, 110, true)
             frameAnimation?.setAnimationListener(this)
 
             isLocked = true
-            btn_flag_lock.setBackgroundResource(R.mipmap.icon_encryption)
-            btn_app_lock.setBackgroundResource(R.mipmap.icon_encryption)
+            iv_flag_lock?.setBackgroundResource(R.mipmap.icon_encryption)
+            iv_app_lock?.setBackgroundResource(R.mipmap.icon_encryption)
 
             Handler().postDelayed(Runnable {
                 finishStartAnimation()
-            }, 6000)
+            }, 4500)
 
         } else {
             isLocked = true
-            btn_flag_lock.setBackgroundResource(R.mipmap.icon_encryption)
-            btn_app_lock.setBackgroundResource(R.mipmap.icon_encryption)
+            iv_flag_lock?.setBackgroundResource(R.mipmap.icon_encryption)
+            iv_app_lock?.setBackgroundResource(R.mipmap.icon_encryption)
 
             frameAnimation?.restartPlay()
             Handler().postDelayed(Runnable {
                 finishStartAnimation()
-            }, 6000)
+            }, 4500)
         }
     }
 
@@ -500,19 +534,21 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
         frameAnimation?.pauseAnimation()
         isConnecting = false
         if(selectedTunnel?.getDataState() == Tunnel.State.UP) {
-            iv_home_connect_toast.visibility = View.VISIBLE
+            iv_home_connect_toast?.visibility = View.VISIBLE
             Handler().postDelayed({
-                iv_home_connect_toast.visibility = View.GONE
+                iv_home_connect_toast?.visibility = View.GONE
             }, 3000)
-            iv_tunnel_connect.setBackgroundResource(R.mipmap.icon_connect_finish)
+            iv_tunnel_connect?.setBackgroundResource(R.mipmap.icon_connect_finish)
+        }else {
+            setTunnelState(true)
         }
     }
     private fun finishDisconnectAnimation() {
         isLocked = false
-        btn_flag_lock.setBackgroundResource(R.mipmap.icon_right_arrow)
-        btn_app_lock.setBackgroundResource(R.mipmap.icon_right_arrow)
+        iv_flag_lock?.setBackgroundResource(R.mipmap.icon_right_arrow)
+        iv_app_lock?.setBackgroundResource(R.mipmap.icon_right_arrow)
         disconnectFrameAnimation?.pauseAnimation()
-        iv_tunnel_connect.setBackgroundResource(R.mipmap.icon_home_connect)
+        iv_tunnel_connect?.setBackgroundResource(R.mipmap.icon_home_connect)
     }
 
     private fun disConnectRequest() {
@@ -591,6 +627,37 @@ class TunnelConnectFragment : ToolbarFragment(),OnListenerObservableTunnel, Fram
                             // ToastUtils.show(apiErrorModel.message)
                         }                    }
                 })
+    }
+
+    fun queryReplyCount() {
+
+        ApiClient.instance.service.queryReplyCount(AppConfigData.loginName ?: "")
+                .compose(NetworkScheduler.compose())
+                .bindUntilEvent(this, FragmentEvent.DESTROY)
+                .subscribe(object : ApiResponse<QueryReplyCountResponse>(requireActivity(),false){
+                    override fun businessFail(data: QueryReplyCountResponse) {
+                        // ToastUtils.show(data.message ?: "")
+                    }
+                    override fun businessSuccess(data: QueryReplyCountResponse) {
+                        if (data != null) {
+                            data.data == 1
+                            if (data.data > 0) {
+                                val count = data.data
+                                tv_red_message?.setText(count.toString())
+                                tv_red_message?.visibility = View.VISIBLE
+                            } else {
+                                tv_red_message?.visibility = View.GONE
+                            }
+                            LogUtils.e("service.connected success")
+                        }
+                    }
+                    override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
+                        if (this != null) {
+                            // ToastUtils.show(apiErrorModel.message)
+                        }                    }
+                })
+
+
     }
 
 

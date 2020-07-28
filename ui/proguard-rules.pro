@@ -19,6 +19,8 @@
 # 保留R下面的资源
 -keep class **.R$* {*;}
 
+-keep class com.appsflyer.** { *; }
+
 
 -dontwarn sun.misc.Unsafe
 
@@ -129,6 +131,10 @@
 -keep class com.squareup.okhttp.** { *; }
 -keep interface com.squareup.okhttp.** { *; }
 
+#crashlytics
+-keep public class * extends java.lang.Exception
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
 
 
 

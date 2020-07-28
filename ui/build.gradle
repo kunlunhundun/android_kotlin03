@@ -10,7 +10,10 @@ group groupName
 // keystore.properties file, in the rootProject folder.
 final def keystorePropertiesFile = rootProject.file("keystore.properties")
 
+
+
 android {
+
     buildToolsVersion '29.0.3'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -29,14 +32,13 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode vercode()
-        versionName "1.0.0"
+        versionName "1.0.4"
         buildConfigField 'int', 'MIN_SDK_VERSION', "$minSdkVersion.apiLevel"
     }
     lintOptions {
         abortOnError false
         baseline file("lint-baseline.xml")
         warningsAsErrors true
-
     }
     dataBinding {
         enabled = true
@@ -51,6 +53,12 @@ android {
 
         //keyPassword sirius123456
         signingConfigs {
+            debug {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
             release {
                 keyAlias keystoreProperties['keyAlias']
                 keyPassword keystoreProperties['keyPassword']
@@ -67,14 +75,19 @@ android {
         }
         debug {
             debuggable true
-            applicationIdSuffix ".debug"
-            versionNameSuffix "-debug"
+          //  applicationIdSuffix ".debug"
+          //  versionNameSuffix "-debug"
+            ext.alwaysUpdateBuildId = false
         }
+
     }
     lintOptions {
         disable('LongLogTag')
     }
+
 }
+
+
 
 static def vercode() {
     return Integer.parseInt(new Date().format("yyMMddHHmm"))
@@ -129,6 +142,15 @@ dependencies {
     implementation  "com.qianwen:update-app:3.5.2"
     implementation  "com.qianwen:okhttp-utils:3.8.0"
 
+    implementation  "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14"
+    implementation  "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14"
+
+    implementation 'com.appsflyer:af-android-sdk:5.+'
+    implementation 'com.android.installreferrer:installreferrer:1.0'
+
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
+
     implementation 'com.facebook.android:facebook-login:[5,6)'
     //Retrofit相关
     implementation([dep.loggingInterceptor,//用于查看http请求时的log
@@ -148,3 +170,6 @@ tasks.withType(JavaCompile) {
     options.compilerArgs << '-Xlint:unchecked'
     options.deprecation = true
 }
+
+apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
+apply plugin: 'io.fabric'

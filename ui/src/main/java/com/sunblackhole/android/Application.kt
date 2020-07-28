@@ -8,16 +8,18 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
-import android.os.AsyncTask
-import android.os.Build
-import android.os.Handler
-import android.os.Looper
-import android.os.StrictMode
+import android.os.*
 import android.os.StrictMode.VmPolicy
 import android.text.TextUtils
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
+import com.appsflyer.AppsFlyerConversionListener
+import com.appsflyer.AppsFlyerLib
+import com.crashlytics.android.Crashlytics
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hjq.toast.ToastUtils
@@ -31,14 +33,13 @@ import com.sunblackhole.android.backend.GoBackend
 import com.sunblackhole.android.backend.WgQuickBackend
 import com.sunblackhole.android.configStore.FileConfigStore
 import com.sunblackhole.android.model.TunnelManager
-import com.sunblackhole.android.util.AsyncWorker
-import com.sunblackhole.android.util.ExceptionLoggers
-import com.sunblackhole.android.util.ModuleLoader
-import com.sunblackhole.android.util.RootShell
-import com.sunblackhole.android.util.ToolsInstaller
+import com.sunblackhole.android.util.*
+import io.fabric.sdk.android.Fabric
 import java9.util.concurrent.CompletableFuture
 import java.lang.ref.WeakReference
-import java.util.Locale
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class Application : android.app.Application(), OnSharedPreferenceChangeListener {
     private val futureBackend = CompletableFuture<Backend>()
@@ -56,8 +57,10 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
     private  var excludeAppNameList:ArrayList<String> = ArrayList()
     private  var includeAppNameList:ArrayList<String> = ArrayList()
     private lateinit var mAcach: ACache
-
     var isNeedConnectByModifyAppFlag:Boolean = false //改变设置后自动重新连接
+    private val devKey = "bBdEhLPpGE7aWhho4JoJwn"
+
+    lateinit var firebaseAnalytics: FirebaseAnalytics
 
 
     override fun attachBaseContext(context: Context) {
@@ -78,6 +81,19 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
     override fun onCreate() {
         Log.i(TAG, USER_AGENT)
         super.onCreate()
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
+
+        AppsFlyerInstall()
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+        Fabric.with(this, Crashlytics())
+
+        var bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "tianming");
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN,bundle)
+
 
         var version = Utils.getVersion()
 
@@ -117,12 +133,14 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
 
     fun initAppData(){
 
+        LogUtils.e("initAppData--->")
         val appFlag =  get().mAcach.getAsString(CACHE_ALLOW_APP_FLAG)
         if (TextUtils.isEmpty(appFlag) == true) {
             get().mAcach.put(CACHE_ALLOW_APP_FLAG,"1")
         }
         var excludeAppStr = getAcache().getAsString(CACHE_EXCCLUDE_DATA)
         //val turnsType = object : TypeToken<ArrayList<AppPackageModel>>() {}.type
+
         val turnsType = object : TypeToken<ArrayList<String>>() {}.type
         if ( !TextUtils.isEmpty(excludeAppStr) ) {
             excludeAppNameList = Gson().fromJson<ArrayList<String>>(excludeAppStr,  turnsType)
@@ -131,7 +149,6 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
         if (!TextUtils.isEmpty(includeAppStr)) {
             includeAppNameList = Gson().fromJson<ArrayList<String>>(includeAppStr, turnsType)
         }
-
         // val turnsType = object : TypeToken<MutableList<AppPackageModel>>() {}.type
         // val data = Gson().fromJson<MutableList<AppPackageModel>>("dataString",  turnsType)
 
@@ -170,6 +187,38 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
         }
     }
 
+
+
+    private fun AppsFlyerInstall() {
+
+        val conversionDataListener  = object : AppsFlyerConversionListener{
+            override fun onConversionDataSuccess(data: MutableMap<String, Any>?) {
+                data?.let { cvData ->
+                    cvData.map {
+                        Log.i("LOG_TAG", "conversion_attribute:  ${it.key} = ${it.value}")
+                    }
+                }
+            }
+
+            override fun onConversionDataFail(error: String?) {
+                LogUtils.e( "error onAttributionFailure :  $error")
+            }
+
+            override fun onAppOpenAttribution(data: MutableMap<String, String>?) {
+                data?.map {
+                    LogUtils.e("onAppOpen_attribute: ${it.key} = ${it.value}")
+                }
+            }
+
+            override fun onAttributionFailure(error: String?) {
+                LogUtils.e( "error onAttributionFailure :  $error")
+            }
+        }
+
+        AppsFlyerLib.getInstance().init(devKey, conversionDataListener, applicationContext)
+        AppsFlyerLib.getInstance().startTracking(this)
+
+    }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if ("multiple_tunnels" == key && backend != null && backend is WgQuickBackend)

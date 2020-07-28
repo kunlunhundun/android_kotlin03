@@ -114,6 +114,7 @@ class FrameAnimation {
         playByDurationsAndDelay(0)
     }
 
+
     private fun playByDurationsAndDelay(i: Int) {
         mImageView!!.postDelayed(Runnable {
             if (isPause) {   // 暂停和播放需求

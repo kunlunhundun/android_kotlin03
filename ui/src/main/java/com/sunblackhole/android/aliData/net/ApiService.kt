@@ -27,6 +27,11 @@ interface ApiService {
     @POST("sso/login")
     fun login(@Body usernameRegisterRequest: UsernameLoginRequest): Observable<LoginResponse>
 
+    /**
+     * 会员facebook登录接口
+     */
+    @POST("sso/loginByFacebook")
+    fun loginByFacebook(@Query("username") username: String): Observable<LoginResponse>
 
     /**
      * 会员登录接口
@@ -86,11 +91,17 @@ interface ApiService {
 
 
     /**
-     * 获取当前用户所有的信息反馈以及官方的回复
+     * 更新平台版本
      * platfor 0-pc 1-android 2-ios
      */
     @POST("update/checkVersion")
     fun checkVersion(@Query("v") v: String, @Query("platform") platform:String): Observable<UpdateResponse>
+
+    /**
+     * 获取当前用户所有的信息反馈以及官方的回复的数量
+     */
+    @POST("comment/queryReplyCount")
+    fun queryReplyCount(@Query("username") username : String): Observable<QueryReplyCountResponse>
 
 
 }

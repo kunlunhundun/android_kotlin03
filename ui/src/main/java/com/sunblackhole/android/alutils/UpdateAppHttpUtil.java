@@ -19,6 +19,8 @@ class UpdateAppHttpUtil implements  HttpManager {
 
 
 
+
+
     /**
      * 异步get
      *

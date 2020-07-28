@@ -65,7 +65,7 @@ class AliFeedBackActivity : AliBaseActivity() {
         btn_feed_back.setOnClickListener {
             var content = et_feedback_content.text.toString().trim()
             if (content.length < 5) {
-                ToastUtils.show("please input more 5 character")
+                ToastUtils.show("Please input at least  5  characters")
             } else {
                 //sendFeedBack
                 ApiClient.instance.service.sendFeedBack(type,content)
@@ -79,7 +79,6 @@ class AliFeedBackActivity : AliBaseActivity() {
                                 var intent = Intent(this@AliFeedBackActivity, AliMessageActivity::class.java)
                                 startActivity(intent)
                                 et_feedback_content.setText("")
-                                ToastUtils.show("send the message success!")
                             }
                             override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
                                 if (this != null) {

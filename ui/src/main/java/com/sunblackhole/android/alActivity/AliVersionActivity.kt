@@ -32,8 +32,11 @@ class AliVersionActivity : AliBaseActivity() {
 
     private fun initData() {
 
-        var version = Utils.getVersion()
-        val newV =  version.substring(0, version.length - 6)
+        var v =  Utils.getVersion()
+        var newV = v
+        if (v.length > 6) {
+            newV =  v.substring(0, v.length - 6)
+        }
         tv_version_name.text = "v" + newV
 
     }
@@ -48,9 +51,11 @@ class AliVersionActivity : AliBaseActivity() {
     }
 
     private fun checkupVersion() {
-
-       var v =  Utils.getVersion()
-        val newV =  v.substring(0, v.length - 6)
+        var v =  Utils.getVersion()
+        var newV = v
+        if (v.length > 6) {
+            newV =  v.substring(0, v.length - 6)
+        }
         ApiClient.instance.service.checkVersion(newV,"1")
                 .compose(NetworkScheduler.compose())
                 .bindUntilEvent(this, ActivityEvent.DESTROY)
@@ -74,11 +79,10 @@ class AliVersionActivity : AliBaseActivity() {
     private fun goSuccess(updateResponse: UpdateResponse) {
         if (updateResponse.data?.mustUpdate == 0) {
             ToastUtils.show("The current version is already the latest")
-        } else if (updateResponse.data?.mustUpdate == 1) {
+        } else if (updateResponse.data?.mustUpdate ?:0 > 0) {
            var updateDialog = UpdateDialog()
             updateDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.MyPopupWindow_anim_style);//添加上面创建的style
             updateDialog.show(this?.supportFragmentManager,"updateflag")
-
             updateDialog.updateData(updateResponse.data)
         }
     }

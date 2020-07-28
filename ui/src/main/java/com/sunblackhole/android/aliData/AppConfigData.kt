@@ -12,12 +12,13 @@ import com.sunblackhole.android.aliData.response.WireguardListResponse.VpnServic
 
 object AppConfigData {
 
-    const val runGateUrl = "https://trustsonic.com:8080"//运营环境
+   // const val runGateUrl = "https://trustsonic.com:8080"//运营环境
 
-   // const val runGateUrl = "http://192.168.1.3:8080"//运营环境
-   // const val runGateUrl = "http://121.196.120.24:8080"//运营环境
+    const val runGateUrl = "https://91.216.169.205:8080"
+
+   // const val runGateUrl = "http://192.168.1.164:8080"//运营环境
   // https://trustsonic.com:8080
-   // http://121.196.120.24:8080/swagger-ui.html
+   // http://127.0.0.1:8080/swagger-ui.html
 
     const val APP_VERSION = BuildConfig.VERSION_NAME // 请求的app版本号
     const val GATEWAY_VERSION = "1.0.0" // 请求的网关版本号

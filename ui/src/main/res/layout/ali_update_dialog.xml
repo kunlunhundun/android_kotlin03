@@ -33,7 +33,7 @@
             android:id="@+id/tv_update_v"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Discover a new version v2.0.0"
+            android:text="Discover a new version v1.0.0"
             android:textColor="@color/text_light_black_color"
             android:textSize="16sp"
             android:layout_marginLeft="22dp"

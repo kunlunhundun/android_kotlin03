@@ -3,6 +3,7 @@ package com.sunblackhole.android.alActivity
 import android.os.Bundle
 import android.text.InputType
 import androidx.core.content.ContextCompat
+import com.hjq.toast.ToastUtils
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import com.sunblackhole.android.R
@@ -13,7 +14,6 @@ import com.sunblackhole.android.aliData.net.ApiResponse
 import com.sunblackhole.android.aliData.net.NetworkScheduler
 import com.sunblackhole.android.aliData.response.BaseResponseObject
 import com.sunblackhole.android.alutils.DeviceInfo
-import com.sunblackhole.android.alutils.ToastUtils
 import com.sunblackhole.android.alutils.Utils
 import com.sunblackhole.android.alutils.CountDownTimer
 import kotlinx.android.synthetic.main.ali_forget_password_activity.*
@@ -90,9 +90,9 @@ class AliForgetPasswordActivity : AliBaseActivity() {
             if (!ischeckEmail) {
                 ToastUtils.show("invalid email address")
             } else if (!ischeckPassword) {
-                ToastUtils.show("Use 6 or more characters(combination of letters,numbers)")
+                ToastUtils.show("Enter a combination of at least 6 numbers and letters.")
             } else if (!ischeckCode) {
-                ToastUtils.show("Use 6 numbers code")
+                ToastUtils.show("Please input verification code")
             } else if (ischeckEmail && ischeckPassword && ischeckCode) {
                 forgetPassword(email,password,code)
             }
@@ -134,7 +134,8 @@ class AliForgetPasswordActivity : AliBaseActivity() {
                         }
                     }
                     override fun businessSuccess(data: BaseResponseObject) {
-                        ToastUtils.show("code alread send ")
+
+                        ToastUtils.show("We've sent a verification code to your email address.\n ")
                         mTimer.start()
                     }
                     override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
@@ -156,7 +157,7 @@ class AliForgetPasswordActivity : AliBaseActivity() {
                         ToastUtils.show(data.message ?: "")
                     }
                     override fun businessSuccess(data: BaseResponseObject) {
-                        ToastUtils.show("password is update success")
+                        ToastUtils.show("Reset password successfully.")
                         finish()
                     }
                     override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {

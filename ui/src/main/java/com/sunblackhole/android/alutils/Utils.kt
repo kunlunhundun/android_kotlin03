@@ -11,6 +11,7 @@ import android.os.Environment
 import android.telephony.TelephonyManager
 import android.text.TextUtils
 import com.github.dfqin.grantor.PermissionsUtil
+import com.hjq.toast.ToastUtils
 import com.sunblackhole.android.Application
 import com.vector.update_app.UpdateAppBean
 import com.vector.update_app.UpdateAppManager

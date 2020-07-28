@@ -17,7 +17,7 @@ class MessageInfoResonse : BaseResponseObject(){
             var memberId: String? = null,
             var commentType: Int? = null,
             var content: String? = null,
-            var createTime:Date? = null
+            var createTime:String? = null
     )
 
     data class ReplyObj (
@@ -25,7 +25,7 @@ class MessageInfoResonse : BaseResponseObject(){
             var commentId: String? = null,
             var memberId: String? = null,
             var content:String? = null,
-            var createTime: Date? = null
+            var createTime: String? = null
     )
 
 }
