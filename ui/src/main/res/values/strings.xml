@@ -20,17 +20,17 @@
     <string name="forgot_password">Forgot password</string>
 
     <!-- Strings related to dataGather -->
-    <string name="hybrid_net_no">无网络</string>
-    <string name="hybrid_net_wifi">wifi网络</string>
-    <string name="hybrid_net_4g">4G网络</string>
-    <string name="hybrid_net_3g">3G网络</string>
-    <string name="hybrid_net_2g">2G网络</string>
-    <string name="hybrid_net_unkonw">未知网络状态</string>
-    <string name="service_error">服务器出错</string>
-    <string name="not_found">请求的资源不存在</string>
+    <string name="hybrid_net_no">no network</string>
+    <string name="hybrid_net_wifi">wifi network</string>
+    <string name="hybrid_net_4g">4G network</string>
+    <string name="hybrid_net_3g">3G network</string>
+    <string name="hybrid_net_2g">2G network</string>
+    <string name="hybrid_net_unkonw"></string>
+    <string name="service_error">server is error</string>
+    <string name="not_found"></string>
     <string name="timeout">time out</string>
     <string name="unexpected_error"></string>
-    <string name="unknown_host_error">无法访问该域名</string>
+    <string name="unknown_host_error"></string>
     <string name="network_wrong222">您当前的网络连接有问题，请尝试重新连接网络</string>
     <string name="network_wrong">There is a problem with your current network connection, please try to reconnect to the network
 </string>

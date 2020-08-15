@@ -24,7 +24,6 @@ class HProgressDialogUtils {
             sHorizontalProgressDialog.setCanceledOnTouchOutside(false);
             if (isShowSize)
                 sHorizontalProgressDialog.setProgressNumberFormat("%2dMB/%1dMB");
-
         }
         if (!TextUtils.isEmpty(msg)) {
             sHorizontalProgressDialog.setMessage(msg);

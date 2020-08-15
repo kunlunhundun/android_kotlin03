@@ -89,10 +89,10 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         Fabric.with(this, Crashlytics())
-
         var bundle = Bundle()
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "tianming");
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN,bundle)
+
 
 
         var version = Utils.getVersion()
@@ -319,4 +319,7 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
     init {
         weakSelf = WeakReference(this)
     }
+
+
+
 }

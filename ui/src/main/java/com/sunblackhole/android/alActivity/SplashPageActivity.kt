@@ -1,6 +1,4 @@
 /*
- * Copyright © 2020 WireGuard LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
  */
 
 package com.sunblackhole.android.alActivity
@@ -168,10 +166,9 @@ class SplashPageActivity : RxAppCompatActivity(), UpdateDialog.OnClickCancelList
         } else if (updateResponse.data?.mustUpdate ?:0 > 0) {
 
             var updateDialog = UpdateDialog()
+            updateDialog.mUpdateObj = updateResponse.data
             updateDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.MyPopupWindow_anim_style);//添加上面创建的style
             updateDialog.show(this?.supportFragmentManager,"updateflag")
-
-            updateDialog.updateData(updateResponse.data)
             updateDialog.setOnCancelListener(this)
         }
     }

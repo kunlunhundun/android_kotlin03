@@ -71,7 +71,6 @@ class AliAppFilterActivity : AliBaseActivity() {
     fun initData(){
 
         setTile("VPN settings")
-
         var lastSelect = Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
         LogUtils.e("lastselect:",lastSelect)
         originalAppFlag = lastSelect.toInt()

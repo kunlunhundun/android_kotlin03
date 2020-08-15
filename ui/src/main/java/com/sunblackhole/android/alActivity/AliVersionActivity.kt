@@ -81,9 +81,9 @@ class AliVersionActivity : AliBaseActivity() {
             ToastUtils.show("The current version is already the latest")
         } else if (updateResponse.data?.mustUpdate ?:0 > 0) {
            var updateDialog = UpdateDialog()
+            updateDialog.mUpdateObj = updateResponse.data
             updateDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.MyPopupWindow_anim_style);//添加上面创建的style
             updateDialog.show(this?.supportFragmentManager,"updateflag")
-            updateDialog.updateData(updateResponse.data)
         }
     }
 

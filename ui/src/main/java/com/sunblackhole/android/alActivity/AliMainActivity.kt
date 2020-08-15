@@ -57,7 +57,7 @@ class AliMainActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSel
             }
             displayFragment(TunnelConnectFragment())
         }
-        loadData()
+       // loadData()
         initListener()
     }
 

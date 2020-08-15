@@ -1,8 +1,4 @@
-/*
- * Copyright © 2016 Southern Storm Software, Pty Ltd.
- * Copyright © 2017-2019 WireGuard LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
+
 
 package com.sunblackhole.crypto;
 

@@ -1,8 +1,4 @@
-/* SPDX-License-Identifier: BSD
- *
- * Copyright © 2017-2019 WireGuard LLC. All Rights Reserved.
- *
- */
+
 
 #define FILE_IS_EMPTY
 

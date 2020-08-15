@@ -1,17 +1,23 @@
 /*
- * Copyright © 2020 WireGuard LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
  */
 
 package com.sunblackhole.android.alActivity
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hjq.toast.ToastUtils
 import com.sunblackhole.android.R
 import com.sunblackhole.android.alModel.SelectWireguardEvent
 import com.sunblackhole.android.alModel.VpnPointModel
 import com.sunblackhole.android.alWidget.adapter.VpnPointItemAdapter
 import com.sunblackhole.android.aliData.AppConfigData
+import com.sunblackhole.android.aliData.net.ApiClient
+import com.sunblackhole.android.aliData.net.ApiErrorModel
+import com.sunblackhole.android.aliData.net.ApiResponse
+import com.sunblackhole.android.aliData.net.NetworkScheduler
+import com.sunblackhole.android.aliData.response.WireguardListResponse
+import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import kotlinx.android.synthetic.main.ali_select_country_vpn_activity.*
 import org.greenrobot.eventbus.EventBus
 
@@ -23,6 +29,7 @@ class AliSelectCountryVpnActivity : AliBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
+        loadData()
     }
     override fun getLayoutId(): Int {
         return R.layout.ali_select_country_vpn_activity
@@ -33,10 +40,36 @@ class AliSelectCountryVpnActivity : AliBaseActivity() {
         var vpnPointModel = VpnPointModel("icon_china_flag","china")
       //  mListData.add(vpnPointModel)
 
+        val manager =  LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false)
+        rv_vpn_point.setLayoutManager(manager);
+        val addapter =  VpnPointItemAdapter(mListData);
+        rv_vpn_point.setAdapter(addapter);
+        vpnPointAdapter = addapter
+        addapter.onItemClickLister = object : VpnPointItemAdapter.OnItemClickLister {
+            override fun onItemClick(position: Int) {
+                //refreshAdapter(position)
+                val event = SelectWireguardEvent()
+                var model = mListData.get(position)
+                event.index = position
+                event.icon_flag = model.icon
+                EventBus.getDefault().post(event)
+                finish()
+            }
+        }
+        addapter.notifyDataSetChanged()
+    }
+
+    fun refreshData() {
+
         if (AppConfigData.wireguardList != null) {
+
             for (item in AppConfigData.wireguardList!!) {
                 var model = VpnPointModel("icon_usa_flag",item.lineName!!)
+
                 when {
+                    (item.lineName!!.toLowerCase().contains("tik") == true) -> {
+                        model = VpnPointModel("icon_tiktok",item.lineName!!)
+                    }
                     (item.lineName!!.toLowerCase().contains("usa") == true) -> {
                         model = VpnPointModel("icon_usa_flag",item.lineName!!)
                     }
@@ -113,22 +146,30 @@ class AliSelectCountryVpnActivity : AliBaseActivity() {
                 mListData.add(model)
             }
         }
-        val manager =  LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false)
-        rv_vpn_point.setLayoutManager(manager);
-        val addapter =  VpnPointItemAdapter(mListData);
-        rv_vpn_point.setAdapter(addapter);
-        vpnPointAdapter = addapter
-        addapter.onItemClickLister = object : VpnPointItemAdapter.OnItemClickLister {
-            override fun onItemClick(position: Int) {
-                //refreshAdapter(position)
-                val event = SelectWireguardEvent()
-                var model = mListData.get(position)
-                event.index = position
-                event.icon_flag = model.icon
-                EventBus.getDefault().post(event)
-                finish()
-            }
-        }
-        addapter.notifyDataSetChanged()
+        vpnPointAdapter.mList = mListData
+        vpnPointAdapter.notifyDataSetChanged()
     }
+
+    fun loadData() {
+
+        ApiClient.instance.service.getLineWireguard(AppConfigData.loginName!!)
+                .compose(NetworkScheduler.compose())
+                .bindUntilEvent(this, ActivityEvent.DESTROY)
+                .subscribe(object : ApiResponse<WireguardListResponse>(this,true){
+                    override fun businessFail(data: WireguardListResponse) {
+                        ToastUtils.show(data.message ?: "")
+                    }
+                    override fun businessSuccess(data: WireguardListResponse) {
+                        if (data.data != null) {
+                            var wireguardList =  data.data.wireguardList
+                            AppConfigData.wireguardList = wireguardList;
+                            refreshData()
+                        }
+                    }
+                    override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
+                        ToastUtils.show(apiErrorModel.message)
+                    }
+                })
+    }
+
 }

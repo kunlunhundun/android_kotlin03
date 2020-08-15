@@ -25,7 +25,10 @@ class UpdateDialog : DialogFragment(){
     private var updateBtn: Button? = null
     private var mustUpdateBtn: Button? = null
     private var fileName: String? = null
-    private var mUpdateObj: UpdateResponse.UpdateObj? = null
+    public var mUpdateObj: UpdateResponse.UpdateObj? = null
+
+   // constructor(iv: ImageView, frameRes: IntArray, duration: Int, isRepeat: Boolean) {
+
 
     override fun onStart() {
         super.onStart()
@@ -64,9 +67,11 @@ class UpdateDialog : DialogFragment(){
                 dismissAllowingStateLoss()
             }
         }
-        Handler().postDelayed({
-            updateData(mUpdateObj)
-        },1100)
+        updateData(mUpdateObj)
+
+//        Handler().postDelayed({
+//            updateData(mUpdateObj)
+//        },1100)
 
         return rootView
     }

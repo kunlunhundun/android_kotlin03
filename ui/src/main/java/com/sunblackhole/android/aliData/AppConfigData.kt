@@ -12,11 +12,11 @@ import com.sunblackhole.android.aliData.response.WireguardListResponse.VpnServic
 
 object AppConfigData {
 
-   // const val runGateUrl = "https://trustsonic.com:8080"//运营环境
+    const val runGateUrl = "https://trustsonic.com:8080"//运营环境
 
-    const val runGateUrl = "https://91.216.169.205:8080"
+   // const val runGateUrl = "http://91.216.169.205:8082"
 
-   // const val runGateUrl = "http://192.168.1.164:8080"//运营环境
+  //  const val runGateUrl = "http://192.168.1.164:8080"//运营环境
   // https://trustsonic.com:8080
    // http://127.0.0.1:8080/swagger-ui.html
 

@@ -1,8 +1,4 @@
-/* SPDX-License-Identifier: BSD
- *
- * Copyright © 2017-2019 WireGuard LLC. All Rights Reserved.
- *
- */
+
 
 #if defined(__ANDROID_API__) && __ANDROID_API__ < 18
 #include <stdio.h>
