@@ -100,7 +100,7 @@ class SettingsActivity : ThemeChangeAwareActivity() {
                 }
             }
             preferenceManager.findPreference<Preference>("log_viewer")?.setOnPreferenceClickListener {
-                startActivity(Intent(requireContext(), LogViewerActivity::class.java))
+               // startActivity(Intent(requireContext(), LogViewerActivity::class.java))
                 true
             }
             val moduleInstaller = preferenceManager.findPreference<Preference>("module_downloader")
