@@ -137,28 +137,12 @@
             android:name=".alActivity.AliSettingActivity"
             android:label="@string/settings"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.TunnelToggleActivity"
-            android:theme="@style/NoBackgroundTheme" />
-        <activity
-            android:name=".activity.SettingsActivity"
-            android:label="@string/settings"
-            android:parentActivityName=".activity.MainActivity" />
-        <activity
-            android:name=".activity.TunnelCreatorActivity"
-            android:label="@string/create_activity_title"
-            android:parentActivityName=".activity.MainActivity" />
+
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
-        <activity
-            android:name=".activity.LogViewerActivity"
-            android:label="@string/log_viewer_title">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+
 
         <receiver android:name="com.appsflyer.SingleInstallBroadcastReceiver" android:exported="true">
             <intent-filter>
@@ -166,11 +150,7 @@
             </intent-filter>
         </receiver>
 
-        <provider
-            android:name=".activity.LogViewerActivity$ExportedLogContentProvider"
-            android:authorities="${applicationId}.exported-log"
-            android:exported="false"
-            android:grantUriPermissions="true" />
+
 
         <receiver android:name=".BootShutdownReceiver">
             <intent-filter>

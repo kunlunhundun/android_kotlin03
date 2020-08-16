@@ -1,6 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
-#
-# Copyright © 2018-2019 WireGuard LLC. All Rights Reserved.
+
 
 cmake_minimum_required(VERSION 3.4.1)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
