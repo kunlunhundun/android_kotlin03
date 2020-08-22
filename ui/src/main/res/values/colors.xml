@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base palette -->
-    <color name="primary_color">#ff4e505f</color>
+    <color name="primary_color">#067679</color>
     <color name="primary_light_color">#ffffffff</color>
     <color name="primary_dark_color">#ffcccccc</color>
     <color name="secondary_color">#ff1a73e8</color>
@@ -28,7 +28,7 @@
     <color name="bg_light_blue_color">#68befc</color>
     <color name="bg_light_green_color">#68cfa9</color>
     <color name="text_blue_color">#5AC896</color>
-    <color name="btn_blue_color">#5AC896</color>
+    <color name="btn_blue_color">#067679</color>
 
 
     <!-- Theme variables -->
@@ -40,6 +40,7 @@
         @color/secondary_color
     </color>
     <color name="white">#ffffffff</color>
+    <color name="btn_red">#f04957</color>
 
 
     <!-- Log viewer tag colors -->

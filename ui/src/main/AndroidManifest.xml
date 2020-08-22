@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sunblackhole.android"
-    android:installLocation="internalOnly">
+    package="com.supersunstars.android"
+    android:installLocation="internalOnly"
+    tools:ignore="MissingLeanbackLauncher">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -44,25 +45,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".alActivity.AliVersionActivity"></activity>
-        <activity android:name=".alActivity.AliMessageActivity" />
-        <activity android:name=".alActivity.AliFeedBackActivity" />
-        <activity android:name=".alActivity.AliForgetPasswordActivity" />
-        <activity android:name=".alActivity.AliRegistActivity" />
-        <activity android:name=".alActivity.LoginFirstActivity" />
-        <activity android:name=".alActivity.AliSelectAppDetailActivity" />
-        <activity android:name=".alActivity.AliSelectCountryVpnActivity" />
-        <activity android:name=".alActivity.AliAppFilterActivity" />
-        <activity android:name=".alActivity.AliLoginActivity" />
+        <activity android:name=".DjiActivity.DjiVersionActivity">
+        </activity>
+        <activity android:name=".DjiActivity.DjiMessageActivity" />
+        <activity android:name=".DjiActivity.DjiFeedBackActivity" />
+        <activity android:name=".DjiActivity.DjiForgetPasswordActivity" />
+        <activity android:name=".DjiActivity.DjiRegistActivity" />
+        <activity android:name=".DjiActivity.DjiLoginFirstActivity" />
+        <activity android:name=".DjiActivity.DjiSelectAppDetailActivity" />
+        <activity android:name=".DjiActivity.DjiSelectCountryVpnActivity" />
+        <activity android:name=".DjiActivity.DjiAppFilterActivity" />
+        <activity android:name=".DjiActivity.DjiLoginActivity" />
         <activity
-            android:name=".alActivity.SplashPageActivity"
+            android:name=".DjiActivity.SplashPageActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
+       <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -128,13 +130,13 @@
 
 
         <activity
-            android:name=".alActivity.AliMainActivity"
+            android:name=".DjiActivity.DjiMainActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".alActivity.AliSettingActivity"
+            android:name=".DjiActivity.DjiSettingActivity"
             android:label="@string/settings"
             android:screenOrientation="portrait" />
 
@@ -162,24 +164,12 @@
             android:name=".model.TunnelManager$IntentReceiver"
             android:permission="${applicationId}.permission.CONTROL_TUNNELS">
             <intent-filter>
-                <action android:name="com.sunblackhole.android.action.REFRESH_TUNNEL_STATES" />
-                <action android:name="com.sunblackhole.android.action.SET_TUNNEL_UP" />
-                <action android:name="com.sunblackhole.android.action.SET_TUNNEL_DOWN" />
+                <action android:name="com.supersunstars.android.action.REFRESH_TUNNEL_STATES" />
+                <action android:name="com.supersunstars.android.action.SET_TUNNEL_UP" />
+                <action android:name="com.supersunstars.android.action.SET_TUNNEL_DOWN" />
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".QuickTileService"
-            android:icon="@drawable/ic_tile"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="false" />
-        </service>
     </application>
 
 </manifest>

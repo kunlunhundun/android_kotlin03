@@ -31,6 +31,7 @@ android {
     }
     buildTypes {
         release {
+            minifyEnabled false
             externalNativeBuild {
                 cmake {
                     arguments "-DANDROID_PACKAGE_NAME=${groupName}", "-DGRADLE_USER_HOME=${project.gradle.gradleUserHomeDir}"

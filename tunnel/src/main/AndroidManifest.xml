@@ -1,11 +1,11 @@
 
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sunblackhole.android.tunnel">
+    package="com.supersunstars.android.tunnel">
 
     <application>
         <service
-            android:name="com.sunblackhole.android.backend.GoBackend$VpnService"
+            android:name="com.supersunstars.android.backend.GoBackend$VpnService"
             android:permission="android.permission.BIND_VPN_SERVICE">
             <intent-filter>
                 <action android:name="android.net.VpnService" />

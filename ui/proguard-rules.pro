@@ -16,11 +16,17 @@
 # 保留support下的所有类及其内部类
 -keep class android.support.** {*;}
 
+-keep class androidx.** {*;}
+
+
 # 保留R下面的资源
 -keep class **.R$* {*;}
 
 -keep class com.appsflyer.** { *; }
 
+-keep class com.google.firebase.** { *;}
+
+-keep class om.bun.** { *;}
 
 -dontwarn sun.misc.Unsafe
 
