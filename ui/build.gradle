@@ -32,14 +32,14 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode vercode()
-        versionName "1.0.6"
+        versionName "1.1.0"
         multiDexEnabled true
         buildConfigField 'int', 'MIN_SDK_VERSION', "$minSdkVersion.apiLevel"
     }
     lintOptions {
         abortOnError false
         baseline file("lint-baseline.xml")
-        warningsAsErrors true
+        warningsAsErrors false
     }
     dataBinding {
         enabled = true
@@ -71,7 +71,9 @@ android {
     buildTypes {
         release {
             if (keystorePropertiesFile.exists()) signingConfig signingConfigs.release
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true//打开资源压缩
+            zipAlignEnabled true//减少应用在运行时的内存消耗
             proguardFiles "proguard-android-optimize.txt", "proguard-rules.pro"
         }
         debug {

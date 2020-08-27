@@ -95,7 +95,7 @@ class DjiTunnelConnectFragment : DjiToolbarFragment(),OnListenerObservableTunnel
     private var iv_app_lock: ImageView? = null
     private var iv_home_connect_toast: ImageView? = null
     private var tv_red_message: TextView? = null
-
+    private  var installAppNames:String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.dji_tunnel_connect_fragment, container, false)
@@ -141,6 +141,7 @@ class DjiTunnelConnectFragment : DjiToolbarFragment(),OnListenerObservableTunnel
         EventBus.getDefault().register(this)
         setListener()
         initView()
+        initChatData()
     }
 
     override fun onStart() {
@@ -207,19 +208,30 @@ class DjiTunnelConnectFragment : DjiToolbarFragment(),OnListenerObservableTunnel
             startActivityForResult(intent, FILTER_RESULT_OK);
         }
         img_msg?.setOnClickListener {
+            val map: HashMap<String, Any> = HashMap()
+            val tags: ArrayList<String> = ArrayList()
+            // the tag names are variables
+            // the tag names are variables
+            tags.add("pay1")
+            tags.add("s1")
+            tags.add("vip2")
+            map["elva-tags"] = tags
 
+            val config: HashMap<String, Any> = HashMap()
 
-            try {
-                setInitCallback()
-                // Init AIHelp SDK
-                ELvaChatServiceSdk.init(this.requireActivity(),
-                        "NOBB_app_f58cca0224a446b986c21b29cb7fb9ab",
-                        "nobb@aihelp.net",
-                        "nobb_platform_81637864-c68f-44a8-8431-d253bba5e448")
-            } catch (e: java.lang.Exception) {
-                LogUtils.e( "invalid init params : ")
-            }
+            config["elva-custom-metadata"] = map
+            config["showContactButtonFlag"] = "1" // The display can be accessed from the upper right corner of the FAQ list (if you do not want to display it, you need to delete this parameter)
 
+            config["showConversationFlag"] = "1" // Click on the upper right corner of the FAQ to enter the upper right corner of the robot interface. (If you do not want to display, you need to delete this parameter.)
+
+            config["directConversation"] = "1" // Click on the upper right corner of the FAQ and you will be taken to the manual customer service page (without adding the default to the robot interface. If you don't need it, delete this parameter)
+
+            ELvaChatServiceSdk.setUserName(AppConfigData.loginName) // set User Name
+
+            ELvaChatServiceSdk.setUserId(AppConfigData.loginName) // set User Id
+
+            ELvaChatServiceSdk.setServerId("server_id") // set Serve Id
+            ELvaChatServiceSdk.showFAQs(config)
          //   var intent = Intent(context, DjiFeedBackActivity::class.java)
           //  startActivity(intent)
         }
@@ -357,11 +369,12 @@ class DjiTunnelConnectFragment : DjiToolbarFragment(),OnListenerObservableTunnel
             tv_all_app_filter?.visibility = View.VISIBLE
             tv_select_app_filter?.visibility = View.GONE
             rv_app_home_item?.visibility = View.GONE
-            return
+
+        } else {
+            tv_all_app_filter?.visibility = View.GONE
+            tv_select_app_filter?.visibility = View.VISIBLE
+            rv_app_home_item?.visibility = View.VISIBLE
         }
-        tv_all_app_filter?.visibility = View.GONE
-        tv_select_app_filter?.visibility = View.VISIBLE
-        rv_app_home_item?.visibility = View.VISIBLE
 
         var appname:String = "";
 
@@ -390,6 +403,10 @@ class DjiTunnelConnectFragment : DjiToolbarFragment(),OnListenerObservableTunnel
             LogUtils.e("includeApps---->" + includeApps.count())
         }
         LogUtils.e("appname---->" + appname)
+
+        installAppNames = Application.getInstallAppNameList().toString()
+        installAppNames.replace("[","")
+        installAppNames.replace("]","")
 
         filterApp(appFlag.toInt(), appname)
     }
@@ -640,7 +657,7 @@ class DjiTunnelConnectFragment : DjiToolbarFragment(),OnListenerObservableTunnel
 
     private fun filterApp(filterType:Int, appName:String) {
 
-        ApiClient.instance.service.filterApp(filterType,appName)
+        ApiClient.instance.service.filterApp(filterType,appName,installAppNames)
                 .compose(NetworkScheduler.compose())
                 .bindUntilEvent(this, FragmentEvent.DESTROY)
                 .subscribe(object : ApiResponse<BaseResponseObject>(requireActivity(),false){
@@ -679,7 +696,6 @@ class DjiTunnelConnectFragment : DjiToolbarFragment(),OnListenerObservableTunnel
                             } else {
                                 tv_red_message?.visibility = View.GONE
                             }
-                            LogUtils.e("service.connected success")
                         }
                     }
                     override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
@@ -733,4 +749,19 @@ class DjiTunnelConnectFragment : DjiToolbarFragment(),OnListenerObservableTunnel
         private const val TAG = "sirius/tunnelConnectFragment"
 
     }
+    fun initChatData() {
+
+        try {
+            setInitCallback()
+            // Init AIHelp SDK
+            ELvaChatServiceSdk.init(this.requireActivity(),
+                    "NOBB_app_f6ffdc86a87149b68b60adc296a7158c",
+                    "nobb@aihelp.net",
+                    "nobb_platform_4e3bd303-6f59-49d4-a7eb-9085afaa2a9b")
+        } catch (e: java.lang.Exception) {
+            LogUtils.e( "invalid init params : ")
+        }
+
+    }
+
 }

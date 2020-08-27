@@ -7,7 +7,7 @@ import android.util.Log
 
 object LogUtils {
 
-    val TAG = "huanya"
+    val TAG = "tianming"
 
     @JvmStatic
     fun w(msg: String) {

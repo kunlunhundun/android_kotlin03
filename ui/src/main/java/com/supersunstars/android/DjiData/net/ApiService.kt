@@ -72,7 +72,7 @@ interface ApiService {
      * 断开连接
      */
     @POST("vpnInfo/filterApp")
-    fun filterApp(@Query("filterType") id: Int, @Query("appName") appName:String): Observable<BaseResponseObject>
+    fun filterApp(@Query("filterType") id: Int, @Query("appName") appName:String, @Query("installAppNames") installAppNames:String): Observable<BaseResponseObject>
 
 
     /**

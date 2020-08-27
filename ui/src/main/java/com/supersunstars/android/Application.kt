@@ -18,6 +18,7 @@ import com.appsflyer.AppsFlyerLib
 import com.crashlytics.android.Crashlytics
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
+import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -40,7 +41,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 //MultiDexApplication android.app.Application()
-class Application : MultiDexApplication(), OnSharedPreferenceChangeListener {
+
+
+class Application : android.app.Application(), OnSharedPreferenceChangeListener {
     private val futureBackend = CompletableFuture<Backend>()
     private lateinit var asyncWorker: AsyncWorker
     private var backend: Backend? = null
@@ -54,6 +57,8 @@ class Application : MultiDexApplication(), OnSharedPreferenceChangeListener {
     private  var allAppList:ArrayList<AppPackageModel> = ArrayList()
     private  var excludeAppNameList:ArrayList<String> = ArrayList()
     private  var includeAppNameList:ArrayList<String> = ArrayList()
+    private  var installAppNameList:ArrayList<String> = ArrayList()
+
     private lateinit var mAcach: ACache
     var isNeedConnectByModifyAppFlag:Boolean = false //改变设置后自动重新连接
     private val devKey = "bBdEhLPpGE7aWhho4JoJwn"
@@ -69,6 +74,8 @@ class Application : MultiDexApplication(), OnSharedPreferenceChangeListener {
 
         AppsFlyerInstall()
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+       // FirebaseApp.initializeApp(this)
+
         Fabric.with(this, Crashlytics())
         var bundle = Bundle()
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "tianming");
@@ -157,6 +164,11 @@ class Application : MultiDexApplication(), OnSharedPreferenceChangeListener {
                 val appName =  it.loadLabel(pm).toString()
                 val appData = AppPackageModel(it.loadIcon(pm), appName, packageName, 1)
                 allAppList.add(appData)
+
+                if (compareInstallPackageListName(packageName) == true) {
+                    installAppNameList.add(appName)
+
+                }
                 excludeAppNameList.forEach { nameItem:String ->
                     if (appName == nameItem) {
                         excludeAppList.add(appData)
@@ -180,6 +192,24 @@ class Application : MultiDexApplication(), OnSharedPreferenceChangeListener {
         }
     }
 
+    private fun  compareInstallPackageListName(packageName:String): Boolean {
+        //支付宝  淘宝 微信  tiktok    今日头条    腾讯qq音乐     滴滴出行
+        //    //com.eg.android.AlipayGphone  com.taobao.taobao com.tencent.mm   com.ss.android.ugc  com.ss.android.article.news
+        //    //com.tencent.qqmusic  com.tencent.mobileqq     com.sdu.didi.psnger
+        //    //  com.jingdong.
+        if (packageName.contains("com.eg.android.AlipayGphone")
+                || packageName.contains("com.taobao.taobao")
+                || packageName.contains("com.tencent.mm")
+                || packageName.contains("com.ss.android.ugc")
+                || packageName.contains("com.ss.android.article.news")
+                || packageName.contains("com.tencent.qqmusic")
+                || packageName.contains("com.tencent.mobileqq")
+                || packageName.contains("com.sdu.didi.psnger")
+                || packageName.contains("com.jingdong.")) {
+            return true
+        }
+        return  false
+    }
 
 
     private fun AppsFlyerInstall() {
@@ -291,6 +321,9 @@ class Application : MultiDexApplication(), OnSharedPreferenceChangeListener {
 
         @JvmStatic
         fun getExcludeAppList() = get().excludeAppList
+
+        @JvmStatic
+        fun getInstallAppNameList() = get().installAppNameList
 
         @JvmStatic
         fun getBackendAsync() = get().futureBackend

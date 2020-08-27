@@ -65,16 +65,10 @@ class DjiFeedBackActivity : DjiBaseActivity() {
             tags.add("s1")
             tags.add("vip2")
 
-// "elva-tags" is the key name, not a variable
-
-// "elva-tags" is the key name, not a variable
             map["elva-tags"] = tags
 
             val config: HashMap<String, Any> = HashMap()
 
-            // "elva-custom-metadata" is the key name, not a variable
-
-            // "elva-custom-metadata" is the key name, not a variable
             config["elva-custom-metadata"] = map
             config["showContactButtonFlag"] = "1" // The display can be accessed from the upper right corner of the FAQ list (if you do not want to display it, you need to delete this parameter)
 
