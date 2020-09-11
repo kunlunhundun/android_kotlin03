@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.supersunstars.android"
+    package="com.sunshinesky.android"
     android:installLocation="internalOnly"
     tools:ignore="MissingLeanbackLauncher">
 
@@ -36,7 +36,7 @@
     -->
 
     <application
-        android:name=".Application"
+        android:name="com.sunshinesky.android.Application"
         android:allowBackup="true"
         android:banner="@mipmap/ic_launcher"
         android:icon="@mipmap/ic_launcher"
@@ -45,19 +45,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DjiActivity.DjiVersionActivity">
+        <activity android:name="com.sunshinesky.android.albbActivity.AlbbVersionActivity">
         </activity>
-        <activity android:name=".DjiActivity.DjiMessageActivity" />
-        <activity android:name=".DjiActivity.DjiFeedBackActivity" />
-        <activity android:name=".DjiActivity.DjiForgetPasswordActivity" />
-        <activity android:name=".DjiActivity.DjiRegistActivity" />
-        <activity android:name=".DjiActivity.DjiLoginFirstActivity" />
-        <activity android:name=".DjiActivity.DjiSelectAppDetailActivity" />
-        <activity android:name=".DjiActivity.DjiSelectCountryVpnActivity" />
-        <activity android:name=".DjiActivity.DjiAppFilterActivity" />
-        <activity android:name=".DjiActivity.DjiLoginActivity" />
+        <activity android:name="com.sunshinesky.android.albbActivity.AlbbMessageActivity" />
+        <activity android:name="com.sunshinesky.android.albbActivity.AlbbFeedBackActivity" />
+        <activity android:name="com.sunshinesky.android.albbActivity.AlbbForgetPasswordActivity" />
+        <activity android:name="com.sunshinesky.android.albbActivity.AlbbRegistActivity" />
+        <activity android:name="com.sunshinesky.android.albbActivity.AlbbLoginFirstActivity" />
+        <activity android:name="com.sunshinesky.android.albbActivity.AlbbSelectAppDetailActivity" />
+        <activity android:name="com.sunshinesky.android.albbActivity.AlbbSelectCountryVpnActivity" />
+        <activity android:name="com.sunshinesky.android.albbActivity.AlbbAppFilterActivity" />
+        <activity android:name="com.sunshinesky.android.albbActivity.AlbbLoginActivity" />
         <activity
-            android:name=".DjiActivity.SplashPageActivity"
+            android:name="com.sunshinesky.android.albbActivity.AlbbSplashPageActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -130,13 +130,13 @@
 
 
         <activity
-            android:name=".DjiActivity.DjiMainActivity"
+            android:name="com.sunshinesky.android.albbActivity.AlbbMainActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".DjiActivity.DjiSettingActivity"
+            android:name="com.sunshinesky.android.albbActivity.AlbbSettingActivity"
             android:label="@string/settings"
             android:screenOrientation="portrait" />
 
@@ -154,19 +154,19 @@
 
 
 
-        <receiver android:name=".BootShutdownReceiver">
+        <receiver android:name="com.sunshinesky.android.AlbbBootShutdownReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".model.TunnelManager$IntentReceiver"
+            android:name="com.sunshinesky.android.model.TunnelManager$IntentReceiver"
             android:permission="${applicationId}.permission.CONTROL_TUNNELS">
             <intent-filter>
-                <action android:name="com.supersunstars.android.action.REFRESH_TUNNEL_STATES" />
-                <action android:name="com.supersunstars.android.action.SET_TUNNEL_UP" />
-                <action android:name="com.supersunstars.android.action.SET_TUNNEL_DOWN" />
+                <action android:name="com.sunshinesky.android.action.REFRESH_TUNNEL_STATES" />
+                <action android:name="com.sunshinesky.android.action.SET_TUNNEL_UP" />
+                <action android:name="com.sunshinesky.android.action.SET_TUNNEL_DOWN" />
             </intent-filter>
         </receiver>
 

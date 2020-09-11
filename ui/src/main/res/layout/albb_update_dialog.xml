@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:background="@drawable/albb_app_update_radius"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="35dp"
+            android:text="New version"
+            android:textColor="@color/text_black_color"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_update_v"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discover a new version v1.0.0"
+            android:textColor="@color/text_light_black_color"
+            android:textSize="16sp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_version"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+        
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="116dp"
+            android:layout_height="40dp"
+            android:text="Ignore"
+            android:background="@drawable/albb_app_ignore_radius"
+            android:layout_marginLeft="22dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/text_666_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_width="116dp"
+            android:layout_height="40dp"
+            android:text="Update"
+            android:background="@drawable/albb_app_btn_update_radius"
+            android:layout_marginRight="22dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+
+        <Button
+            android:id="@+id/btn_must_update"
+            android:layout_width="116dp"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            android:text="Update"
+            android:background="@drawable/albb_app_btn_update_radius"
+            android:layout_marginRight="22dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

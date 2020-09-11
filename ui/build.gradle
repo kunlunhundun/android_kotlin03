@@ -11,7 +11,6 @@ group groupName
 final def keystorePropertiesFile = rootProject.file("keystore.properties")
 
 
-
 android {
 
     buildToolsVersion '29.0.3'
@@ -28,7 +27,7 @@ android {
     dataBinding.enabled true
     viewBinding.enabled true
     defaultConfig {
-        applicationId 'com.supersunstars.android'
+        applicationId 'com.sunshinesky.android'
         minSdkVersion 21
         targetSdkVersion 29
         versionCode vercode()

@@ -275,8 +275,8 @@
 
 #end rxjava retrofit
 
--keep class com.supersunstars.android.DjiData.**{*;}
--keep class com.supersunstars.android.DjiFragment.**{*;}
+-keep class com.sunshinesky.android.albbData.**{*;}
+-keep class com.sunshinesky.android.AlbbFragment.**{*;}
 
 #begin
 -dontwarn javax.annotation.**

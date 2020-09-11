@@ -14,7 +14,7 @@
         android:importantForAccessibility="no"
         android:scaleType="centerCrop"
         android:visibility="visible"
-        android:src="@mipmap/icon_side_bg"/>
+        android:src="@mipmap/icon_draw_side"/>
 
     <TextView
         android:id="@+id/drawer_title"
