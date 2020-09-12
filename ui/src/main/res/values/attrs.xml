@@ -5,9 +5,6 @@
         <attr name="colorMultiselectActiveBackground" format="reference|color" />
     </declare-styleable>
 
-    <declare-styleable name="custom_color">
-        <attr name="colorBackground" format="reference|color" />
-    </declare-styleable>
 
     <!--简单环形进度-->
     <declare-styleable name="SimpleRoundProgress">
@@ -28,6 +25,11 @@
             <enum name="STROKE" value="0" />
             <enum name="FILL" value="1" />
         </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="custom_color">
+        <attr name="colorBackground" format="reference|color" />
     </declare-styleable>
 
 </resources>

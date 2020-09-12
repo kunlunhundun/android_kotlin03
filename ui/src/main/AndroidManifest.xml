@@ -32,11 +32,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/permission_label"
         android:protectionLevel="dangerous" />
-    <!--        android:networkSecurityConfig="@xml/network_security_config"
-    -->
 
     <application
-        android:name="com.sunshinesky.android.Application"
+        android:name=".Application"
         android:allowBackup="true"
         android:banner="@mipmap/ic_launcher"
         android:icon="@mipmap/ic_launcher"
@@ -45,46 +43,56 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.sunshinesky.android.albbActivity.AlbbVersionActivity">
-        </activity>
-        <activity android:name="com.sunshinesky.android.albbActivity.AlbbMessageActivity" />
-        <activity android:name="com.sunshinesky.android.albbActivity.AlbbFeedBackActivity" />
-        <activity android:name="com.sunshinesky.android.albbActivity.AlbbForgetPasswordActivity" />
-        <activity android:name="com.sunshinesky.android.albbActivity.AlbbRegistActivity" />
-        <activity android:name="com.sunshinesky.android.albbActivity.AlbbLoginFirstActivity" />
-        <activity android:name="com.sunshinesky.android.albbActivity.AlbbSelectAppDetailActivity" />
-        <activity android:name="com.sunshinesky.android.albbActivity.AlbbSelectCountryVpnActivity" />
-        <activity android:name="com.sunshinesky.android.albbActivity.AlbbAppFilterActivity" />
-        <activity android:name="com.sunshinesky.android.albbActivity.AlbbLoginActivity" />
         <activity
-            android:name="com.sunshinesky.android.albbActivity.AlbbSplashPageActivity"
+            android:name=".albbActivity.AlbbMasterItemListActivity"
+            android:label="@string/title_albbmasteritem_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".albbActivity.AlbbMasterItemDetailActivity"
+            android:label="@string/title_albbmasteritem_detail"
+            android:parentActivityName=".albbActivity.AlbbMasterItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sunshinesky.android.albbActivity.AlbbMasterItemListActivity" />
+        </activity>
+        <activity
+            android:name=".albbActivity.AlbbBottomActivity"
+            android:label="@string/title_activity_albb_bottom"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".albbActivity.AlbbOrderDetailActivity"
+            android:label="@string/title_activity_albb_order_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".albbActivity.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".albbActivity.AlbbInputCardInfoActivity" />
+        <activity android:name=".albbActivity.AlbbSelectAmountActivity" />
+        <activity android:name=".albbActivity.AlbbVersionActivity" />
+        <activity android:name=".albbActivity.AlbbMessageActivity" />
+        <activity android:name=".albbActivity.AlbbFeedBackActivity" />
+        <activity android:name=".albbActivity.AlbbForgetPasswordActivity" />
+        <activity android:name=".albbActivity.AlbbRegistActivity" />
+        <activity android:name=".albbActivity.AlbbLoginFirstActivity" />
+        <activity android:name=".albbActivity.AlbbSelectAppDetailActivity" />
+        <activity android:name=".albbActivity.AlbbSelectCountryVpnActivity" />
+        <activity android:name=".albbActivity.AlbbAppFilterActivity" />
+        <activity android:name=".albbActivity.AlbbLoginActivity" />
+        <activity
+            android:name=".albbActivity.AlbbSplashPageActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-       <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
-        <activity android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="@string/fb_login_protocol_scheme" />
-            </intent-filter>
-        </activity>
-
-
         <activity
             android:name="com.ljoy.chatbot.ChatMainActivity"
             android:configChanges="orientation|screenSize|locale"
-            android:screenOrientation="sensor">
-        </activity>
+            android:screenOrientation="sensor" />
         <activity
             android:name="com.ljoy.chatbot.FAQActivity"
             android:configChanges="orientation|screenSize|locale"
@@ -92,76 +100,95 @@
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https"
+
+                <data
                     android:host="cs30.net"
-                    android:pathPrefix="/elvaFAQ" />
+                    android:pathPrefix="/elvaFAQ"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.ljoy.chatbot.OPActivity"
             android:configChanges="orientation|screenSize|locale"
             android:screenOrientation="sensor"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name="com.ljoy.chatbot.QAWebActivity"
             android:configChanges="orientation|screenSize|locale"
-            android:screenOrientation="sensor">
-        </activity>
-
+            android:screenOrientation="sensor" />
         <activity
             android:name="com.ljoy.chatbot.WebViewActivity"
-            android:screenOrientation="sensor"
             android:configChanges="orientation|screenSize|locale"
+            android:screenOrientation="sensor"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https"
-                    android:host="cs30.net"
-                    android:pathPrefix="/elvaFAQ" />
-            </intent-filter>
 
+                <data
+                    android:host="cs30.net"
+                    android:pathPrefix="/elvaFAQ"
+                    android:scheme="https" />
+            </intent-filter>
         </activity>
 
-
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <activity
-            android:name="com.sunshinesky.android.albbActivity.AlbbMainActivity"
-            android:configChanges="orientation|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
         <activity
-            android:name="com.sunshinesky.android.albbActivity.AlbbSettingActivity"
-            android:label="@string/settings"
-            android:screenOrientation="portrait" />
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
 
-
-        <receiver android:name="com.appsflyer.SingleInstallBroadcastReceiver" android:exported="true">
+        <receiver
+            android:name="com.appsflyer.SingleInstallBroadcastReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".albbActivity.AlbbMainActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".albbActivity.AlbbSettingActivity"
+            android:label="@string/settings"
+            android:screenOrientation="portrait" />
 
-
-        <receiver android:name="com.sunshinesky.android.AlbbBootShutdownReceiver">
+        <receiver android:name=".AlbbBootShutdownReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.sunshinesky.android.model.TunnelManager$IntentReceiver"
+            android:name=".model.TunnelManager$IntentReceiver"
             android:permission="${applicationId}.permission.CONTROL_TUNNELS">
             <intent-filter>
                 <action android:name="com.sunshinesky.android.action.REFRESH_TUNNEL_STATES" />
@@ -169,7 +196,6 @@
                 <action android:name="com.sunshinesky.android.action.SET_TUNNEL_DOWN" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

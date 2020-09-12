@@ -73,7 +73,7 @@ object AlbbLoadingDialog {
      * 获取需要播放的动画资源
      */
     private fun getRes(): IntArray {
-        val typedArray = mActivity?.get()?.resources!!.obtainTypedArray(R.array.loading)
+        val typedArray = mActivity?.get()?.resources!!.obtainTypedArray(R.array.loadingingdkkd)
         val len = typedArray.length()
         val resId = IntArray(len)
         for (i in 0 until len) {

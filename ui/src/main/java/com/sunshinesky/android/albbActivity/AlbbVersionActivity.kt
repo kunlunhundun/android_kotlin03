@@ -19,6 +19,8 @@ class AlbbVersionActivity : AlbbBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initData()
+        initDataAlbbTiandao(1)
+        checkupVersionAlbbTiandao()
         initListener()
         checkupVersion()
     }
@@ -40,6 +42,19 @@ class AlbbVersionActivity : AlbbBaseActivity() {
 
     }
 
+    private fun initDataAlbbTiandao(flag:Int) {
+        if (flag == 1) {
+            return
+        }
+        var v =  AlbbUtils.getVersion()
+        var newV = v
+        if (v.length > 6) {
+            newV =  v.substring(0, v.length - 6)
+        }
+        tv_version_name.text = "v" + newV
+
+    }
+
     private fun initListener() {
 
         cl_update_version.setOnClickListener {
@@ -48,6 +63,35 @@ class AlbbVersionActivity : AlbbBaseActivity() {
         }
 
     }
+
+    private fun checkupVersionAlbbTiandao() {
+        var v =  AlbbUtils.getVersion()
+        var newV = v
+        return
+        if (v.length > 6) {
+            newV =  v.substring(0, v.length - 6)
+        }
+
+        AlbbApiClient.instance.serviceAlbb.checkVersion(newV,"1")
+                .compose(AlbbNetworkScheduler.compose())
+                .bindUntilEvent(this, ActivityEvent.DESTROY)
+                .subscribe(object : AlbbApiResponse<AlbbUpdateResponse>(this,true){
+                    override fun businessFail(data: AlbbUpdateResponse) {
+                        ToastUtils.show(data.message ?: "")
+                    }
+                    override fun businessSuccess(data: AlbbUpdateResponse) {
+                        if (data.data != null) {
+                            goSuccess(data)
+                        }
+                    }
+                    override fun failure(statusCode: Int, albbApiErrorModel: AlbbApiErrorModel) {
+                        if (this != null) {
+                            ToastUtils.show(albbApiErrorModel.message)
+                        }
+                    }
+                })
+    }
+
 
     private fun checkupVersion() {
         var v =  AlbbUtils.getVersion()

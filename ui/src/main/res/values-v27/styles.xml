@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme1" parent="Theme.MaterialComponents.DayNight">
-        <item name="colorPrimary">@color/primary_color</item>
-        <item name="colorOnPrimary">@color/color_control_normal</item>
-        <item name="colorPrimaryDark">@color/primary_color</item>
-        <item name="colorPrimaryVariant">@color/primary_light_color</item>
-        <item name="colorSecondary">@color/secondary_color</item>
-        <item name="colorOnSecondary">@color/secondary_text_color</item>
-        <item name="colorSurface">@color/primary_color</item>
-        <item name="colorOnSurface">@color/color_control_normal</item>
-        <item name="colorBackground">@color/primary_color</item>
-        <item name="colorMultiselectActiveBackground">@color/list_multiselect_background</item>
-        <item name="colorControlNormal">@color/color_control_normal</item>
-        <item name="elevationOverlayColor">@color/primary_light_color</item>
-        <item name="elevationOverlayEnabled">true</item>
-        <item name="android:statusBarColor">@color/status_bar_color</item>
-        <item name="android:windowBackground">@color/primary_color</item>
-        <item name="alertDialogTheme">@style/AppTheme.Dialog</item>
-        <item name="materialAlertDialogTheme">@style/AppTheme.Dialog</item>
-        <item name="actionBarPopupTheme">@style/ThemeOverlay.MaterialComponents.ActionBar</item>
-        <item name="textInputStyle">@style/TextInputLayoutBase</item>
-        <item name="materialCardViewStyle">@style/AppTheme.MaterialCardView</item>
-        <item name="android:windowIsTranslucent">false</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
@@ -65,17 +40,7 @@
         <item name="android:windowBackground">?attr/colorBackground</item>
     </style>
 
-    <style name="BottomSheetDialogTheme" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:navigationBarColor">?attr/colorBackground</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentNavigation">false</item>
-        <item name="android:windowIsTranslucent">false</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:backgroundDimAmount">0.5</item>
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:colorBackground">@android:color/transparent</item>
-    </style>
+
 
     <style name="NoBackgroundTheme" parent="AppTheme">
         <item name="android:windowIsTranslucent">true</item>
@@ -94,15 +59,6 @@
 
     <style name="SectionText" parent="TextAppearance.MaterialComponents.Subtitle1" />
 
-    <style name="ThemeOverlay.AppTheme.TextInputEditText.OutlinedBox" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
-        <item name="colorControlActivated">@color/color_control_normal</item>
-    </style>
 
-    <style name="TextInputLayoutBase" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">?attr/colorSecondary</item>
-        <item name="hintTextColor">?attr/colorOnPrimary</item>
-        <item name="materialThemeOverlay">
-            @style/ThemeOverlay.AppTheme.TextInputEditText.OutlinedBox
-        </item>
-    </style>
+
 </resources>

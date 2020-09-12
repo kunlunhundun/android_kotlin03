@@ -2,7 +2,7 @@
 <!--
   -->
 <resources>
-    <array name="loading">
+    <array name="loadingingdkkd">
     </array>
     <array name="connecting">
         <item>@mipmap/icon_connecting_00</item>

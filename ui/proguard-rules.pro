@@ -44,7 +44,6 @@
 # Android开发中一些需要保留的公共部分
 #
 #############################################
--keep class com.ultimate.ag.a03.data.**{*;}
 # 保留我们使用的四大组件，自定义的Application等等这些类不被混淆
 # 因为这些子类都有可能被外部调用
 -keep public class * extends android.app.Activity
@@ -276,7 +275,6 @@
 #end rxjava retrofit
 
 -keep class com.sunshinesky.android.albbData.**{*;}
--keep class com.sunshinesky.android.AlbbFragment.**{*;}
 
 #begin
 -dontwarn javax.annotation.**

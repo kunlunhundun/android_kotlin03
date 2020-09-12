@@ -64,22 +64,23 @@ import java.nio.charset.StandardCharsets
 
 class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunnel, AlbbFrameAnimation.AnimationListener {
 
-    private var pendingTunnel: ObservableTunnel? = null
-    private var pendingTunnelUp: Boolean? = null
-    protected var selectedTunnel: ObservableTunnel? = null
-    private var currentConfig: Config? = null
 
-    private var albbFrameAnimation: AlbbFrameAnimation? = null
-    private var disconnectAlbbFrameAnimation: AlbbFrameAnimation? = null
-    private var isConnecting: Boolean = false
-    private var isLocked: Boolean = false
 
-    private var curAlbbWireguardData: AlbbWireguardListResponseAlbb.VpnServiceObject? = null
-    private var albbHomeAppAdapter: AlbbHomeAppAdapter? = null
+    private var recylerAppHome: RecyclerView? = null
+    private var constrainSelectApp: ConstraintLayout? = null
+    private var buttonTunnelConnect: Button? = null
+    private var imgLogoAnimation: ImageView? = null
+    private var constrainSelectLine: ConstraintLayout? = null
+    private var imgMessage: ImageView? = null
+    private var textLineName: TextView? = null
+    private var imgCountryFlag: ImageView? = null
+    private var textAllAppFilter: TextView? = null
+    private var textSelectAppFilter: TextView? = null
+    private var imgFlagLock: ImageView? = null
+    private var imgAppLock: ImageView? = null
 
     private var toolbarTitle: TextView? = null
     private var toolbarIcon: ImageView? = null
-
     private var rv_app_home_item: RecyclerView? = null
     private var cl_select_app: ConstraintLayout? = null
     private var btn_tunnel_connect: Button? = null
@@ -95,6 +96,19 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
     private var iv_home_connect_toast: ImageView? = null
     private var tv_red_message: TextView? = null
     private  var installAppNames:String = ""
+
+    private var pendingTunnel: ObservableTunnel? = null
+    private var pendingTunnelUp: Boolean? = null
+    protected var selectedTunnel: ObservableTunnel? = null
+    private var currentConfig: Config? = null
+
+    private var albbFrameAnimation: AlbbFrameAnimation? = null
+    private var disconnectAlbbFrameAnimation: AlbbFrameAnimation? = null
+    private var isConnecting: Boolean = false
+    private var isLocked: Boolean = false
+
+    private var curAlbbWireguardData: AlbbWireguardListResponseAlbb.VpnServiceObject? = null
+    private var albbHomeAppAdapter: AlbbHomeAppAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.albb_tunnel_connect_fragment, container, false)
@@ -114,12 +128,18 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
             StatusBarCompat.setStatusBarColor(this.activity, ContextCompat.getColor(this.requireContext(),R.color.white))
             toolbarTitle?.setTextColor(ContextCompat.getColor(this.requireContext(),R.color.text_black_color))
         }
-        toolbarIcon = toolbar.findViewById(R.id.toolbar_icon)
-        tv_line_name = view.findViewById(R.id.tv_line_name)
-        iv_country_flag = view.findViewById(R.id.iv_country_flag)
-        tv_all_app_filter = view.findViewById(R.id.tv_all_app_filter)
-        tv_select_app_filter = view.findViewById(R.id.tv_select_app_filter)
-        iv_flag_lock = view.findViewById(R.id.iv_flag_lock)
+
+        buttonTunnelConnect = view.findViewById(R.id.btn_tunnel_connect)
+        imgLogoAnimation = view.findViewById(R.id.iv_logo_animation)
+        constrainSelectLine = view.findViewById(R.id.cl_select_line)
+        imgMessage = view.findViewById(R.id.img_msg)
+        textLineName = view.findViewById(R.id.tv_line_name)
+        imgCountryFlag = view.findViewById(R.id.iv_country_flag)
+        textAllAppFilter = view.findViewById(R.id.tv_all_app_filter)
+        textSelectAppFilter = view.findViewById(R.id.tv_select_app_filter)
+        imgFlagLock = view.findViewById(R.id.iv_flag_lock)
+
+
         iv_app_lock = view.findViewById(R.id.iv_app_lock)
         iv_home_connect_toast = view.findViewById(R.id.iv_home_connect_toast)
         tv_red_message = view.findViewById(R.id.tv_red_message)
@@ -129,6 +149,12 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         iv_logo_animation = view.findViewById(R.id.iv_logo_animation)
         cl_select_line = view.findViewById(R.id.cl_select_line)
         img_msg = view.findViewById(R.id.img_msg)
+        toolbarIcon = toolbar.findViewById(R.id.toolbar_icon)
+        tv_line_name = view.findViewById(R.id.tv_line_name)
+        iv_country_flag = view.findViewById(R.id.iv_country_flag)
+        tv_all_app_filter = view.findViewById(R.id.tv_all_app_filter)
+        tv_select_app_filter = view.findViewById(R.id.tv_select_app_filter)
+        iv_flag_lock = view.findViewById(R.id.iv_flag_lock)
 
         toolbarTitle?.text = "Cattle VPN"
         toolbarIcon?.visibility = View.GONE
@@ -137,7 +163,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         EventBus.getDefault().register(this)
         setListener()
         initView()
-        initChatData()
+        initClientChatData()
     }
 
     override fun onStart() {
@@ -163,7 +189,6 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         var appList = ArrayList<AlbbAppPackageModel>()
         albbHomeAppAdapter = AlbbHomeAppAdapter(appList)
         rv_app_home_item?.setAdapter(albbHomeAppAdapter)
-
         rv_app_home_item?.setOnTouchListener(OnTouchListener { v, event ->
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 cl_select_app?.performClick();  //模拟父控件的点击
@@ -172,6 +197,8 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         })
 
         Handler().postDelayed(Runnable {
+
+            configAPPItemAlbbTiandao(1)
             configAPPItem()
         },3000)
     }
@@ -180,13 +207,11 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
     private fun setListener() {
 
         btn_tunnel_connect?.setOnClickListener {
-
             if (selectedTunnel == null) {
                 ToastUtils.show("please select line to connect")
                 return@setOnClickListener
             }
             startAndStopWireGuard()
-
         }
         cl_select_line?.setOnClickListener {
             if (isLocked == true) {
@@ -196,7 +221,6 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
             startActivity(intent)
         }
         cl_select_app?.setOnClickListener {
-
             if (isLocked == true) {
                 return@setOnClickListener
             }
@@ -207,23 +231,19 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
             val map: HashMap<String, Any> = HashMap()
             val tags: ArrayList<String> = ArrayList()
             // the tag names are variables
-            // the tag names are variables
             tags.add("pay1")
             tags.add("s1")
             tags.add("vip2")
             map["elva-tags"] = tags
-
             val config: HashMap<String, Any> = HashMap()
 
             config["elva-custom-metadata"] = map
             config["showContactButtonFlag"] = "1" // The display can be accessed from the upper right corner of the FAQ list (if you do not want to display it, you need to delete this parameter)
-
             config["showConversationFlag"] = "1" // Click on the upper right corner of the FAQ to enter the upper right corner of the robot interface. (If you do not want to display, you need to delete this parameter.)
 
             config["directConversation"] = "1" // Click on the upper right corner of the FAQ and you will be taken to the manual customer service page (without adding the default to the robot interface. If you don't need it, delete this parameter)
 
             ELvaChatServiceSdk.setUserName(AlbbAppConfigData.loginName) // set User Name
-
             ELvaChatServiceSdk.setUserId(AlbbAppConfigData.loginName) // set User Id
 
             ELvaChatServiceSdk.setServerId("server_id") // set Serve Id
@@ -258,7 +278,60 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
             disconnectAnimation()
         }
         setTunnelState(checked)
+    }
 
+
+    private fun configAPPItemAlbbTiandao( flag: Int) {
+        val appFlag =  Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
+        AlbbLogUtils.e("configAPPItem---->" + appFlag)
+
+        if (flag == 1) {
+            return
+        }
+        if(appFlag.toInt() == 1) {
+            tv_all_app_filter?.visibility = View.VISIBLE
+            tv_select_app_filter?.visibility = View.GONE
+            rv_app_home_item?.visibility = View.GONE
+
+        } else {
+            tv_all_app_filter?.visibility = View.GONE
+            tv_select_app_filter?.visibility = View.VISIBLE
+            rv_app_home_item?.visibility = View.VISIBLE
+        }
+
+        var appname:String = "";
+
+        if (appFlag.toInt() == 2) {
+            tv_select_app_filter?.text = "Do not allow selected apps to use"
+            var excludeApps = Application.getAlbbExcludeAppList()
+            albbHomeAppAdapter?.setDataList(excludeApps)
+            for (appItem in excludeApps) {
+                appname = appname + appItem.name + ","
+            }
+            if (appname.length > 1) {
+                appname = appname.substring(0,appname.length-1)
+            }
+            AlbbLogUtils.e("excludeApps---->" + excludeApps.count())
+        }
+        if (appFlag.toInt() == 3) {
+            tv_select_app_filter?.text = "Allow selected apps to use"
+            var includeApps = Application.getAlbbIncludeAppList()
+            albbHomeAppAdapter?.setDataList(includeApps)
+            for (appItem in includeApps) {
+                appname = appname + appItem.name + ","
+            }
+            if (appname.length > 1) {
+                appname = appname.substring(0,appname.length-1)
+            }
+            AlbbLogUtils.e("includeApps---->" + includeApps.count())
+        }
+        AlbbLogUtils.e("appname---->" + appname)
+
+        installAppNames = Application.getInstallAppNameList().toString()
+        installAppNames.replace("[","")
+        installAppNames.replace("]","")
+
+        filterApp(appFlag.toInt(), appname)
     }
 
 
@@ -292,7 +365,6 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         }
 
     }
-
 
     private fun startConnectWireGuard(albbWireguardData: AlbbWireguardListResponseAlbb.VpnServiceObject) {
 
@@ -488,7 +560,6 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
             AlbbLogUtils.e(TAG, message)
         }
     }
-
 
 
     fun startConnectAnimation() {
@@ -745,8 +816,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         private const val TAG = "Cattle/tunnelConnectFragment"
 
     }
-    fun initChatData() {
-
+    fun initClientChatData() {
         try {
             setInitCallback()
             // Init AIHelp SDK

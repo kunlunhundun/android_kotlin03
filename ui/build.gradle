@@ -83,6 +83,9 @@ android {
         }
 
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
     lintOptions {
         disable('LongLogTag')
     }
@@ -172,6 +175,13 @@ dependencies {
     //RxLifecycle相关
     implementation([dep.rxlifecycleKotlin,
                     dep.rxlifecycleComponents])
+    implementation 'androidx.navigation:navigation-fragment:2.2.1'
+    implementation 'androidx.navigation:navigation-ui:2.2.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
 }
 

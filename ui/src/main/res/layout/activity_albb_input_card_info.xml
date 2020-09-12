@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".albbActivity.AlbbInputCardInfoActivity">
+
+
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/albb_custom_toolbar"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+        <Button
+            android:id="@+id/albb_yinchang_wudala"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_height="56dp"
+            android:text="@string/login"
+            android:background="@drawable/albb_login_trial_radius"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+        </Button>
+
+        <Button
+            android:id="@+id/albb_yinchang_kehehe"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:background="@mipmap/icon_filter_select"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/albb_yinchang_kehehe"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <CheckBox
+        android:id="@+id/cb_app_select"
+        android:layout_marginLeft="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="center_vertical"
+        android:button="@drawable/albb_app_selector"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+
+    <TextView
+        android:id="@+id/activity_my_promo_tag1"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:background="#5a1a1a"
+        android:gravity="center"
+        android:text="less"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/activity_my_promo_tag2"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar" />
+
+    <TextView
+        android:id="@+id/activity_my_promo_tag2"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:background="#5a1a1a"
+        android:gravity="center"
+        android:text="lesson1"
+        android:textColor="#fff"
+        app:layout_constraintLeft_toRightOf="@id/activity_my_promo_tag1"
+        app:layout_constraintRight_toLeftOf="@id/activity_my_promo_tag3"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar" />
+
+    <TextView
+        android:id="@+id/activity_my_promo_tag3"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:background="#5a1a1a"
+        android:gravity="center"
+        android:text="lesson2"
+        android:textColor="#666666"
+        app:layout_constraintLeft_toRightOf="@id/activity_my_promo_tag2"
+        app:layout_constraintRight_toLeftOf="@id/activity_my_promo_tag4"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar" />
+
+    <TextView
+        android:id="@+id/activity_my_promo_tag4"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:background="#5a1a1a"
+        android:gravity="center"
+        android:text="lesson1"
+        android:textColor="#666666"
+        app:layout_constraintLeft_toRightOf="@id/activity_my_promo_tag3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_my_promo_rv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_my_promo_tag1"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

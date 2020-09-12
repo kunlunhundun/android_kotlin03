@@ -16,10 +16,8 @@ import androidx.multidex.MultiDex
 import androidx.preference.PreferenceManager
 import com.appsflyer.AppsFlyerConversionListener
 import com.appsflyer.AppsFlyerLib
-import com.crashlytics.android.Crashlytics
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hjq.toast.ToastUtils
@@ -34,7 +32,6 @@ import com.sunshinesky.android.backend.WgQuickBackend
 import com.sunshinesky.android.configStore.FileConfigStore
 import com.sunshinesky.android.model.TunnelManager
 import com.sunshinesky.android.util.*
-import io.fabric.sdk.android.Fabric
 import java9.util.concurrent.CompletableFuture
 import java.lang.ref.WeakReference
 import java.util.*
@@ -62,7 +59,6 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
     private lateinit var mAcach: AlbbACache
     var isNeedConnectByModifyAppFlag:Boolean = false //改变设置后自动重新连接
     private val devKey = "bBdEhLPpGE7aWhho4JoJwn"
-    lateinit var firebaseAnalytics: FirebaseAnalytics
 
 
     override fun onCreate() {
@@ -73,14 +69,6 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
         AppEventsLogger.activateApp(this);
 
         AppsFlyerInstallCallBack()
-        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-       // FirebaseApp.initializeApp(this)
-        Fabric.with(this, Crashlytics())
-        var bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "tiandao");
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN,bundle)
-        var version = AlbbUtils.getVersion()
-        AlbbLogUtils.e("version ----->", version)
 
         Thread(Runnable {
             try {
