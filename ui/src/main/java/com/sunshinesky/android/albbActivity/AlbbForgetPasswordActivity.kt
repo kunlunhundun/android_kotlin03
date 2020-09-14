@@ -144,7 +144,7 @@ class AlbbForgetPasswordActivity : AlbbBaseActivity() {
                     }
                     override fun businessSuccess(data: AlbbBaseResponseObject) {
 
-                        ToastUtils.show("We've sent a verification code to your email address.\n ")
+                        ToastUtils.show("We've sent a verification code to your email address. ")
                         mTimerAlbb.start()
                     }
                     override fun failure(statusCode: Int, albbApiErrorModel: AlbbApiErrorModel) {

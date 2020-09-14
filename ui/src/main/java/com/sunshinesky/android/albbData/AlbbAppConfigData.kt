@@ -10,22 +10,18 @@ import com.sunshinesky.android.albbData.response.AlbbWireguardListResponseAlbb.V
 object AlbbAppConfigData {
 
     const val runGateUrl = "https://syrinxvpn.com:8080"//运营环境
-
    // const val runGateUrl = "http://91.216.169.205:8082"
-
    // const val runGateUrl = "http://192.168.1.164:8082"//运营环境
   // https://trustsonic.com:8080
    // http://127.0.0.1:8080/swagger-ui.html
 
     const val APP_VERSION = BuildConfig.VERSION_NAME // 请求的app版本号
     const val GATEWAY_VERSION = "1.0.0" // 请求的网关版本号
-
     const val ACACHE_LOGIN_NAME = "ACACHE_LOGIN_NAME"
     const val ACACHE_LOGIIN_PASSWORD = "ACACHE_LOGIIN_PASSWORD"
     const val ACACHE_LOIN_TOKEN = "ACACHE_LOIN_TOKEN"
     const val ACACHE_DEVICE_ID = "ACACHE_DEVICE_ID"
     const val ACACHE_DEVICE_BRAND = "ACACHE_DEVICE_BRAND"
-
 
     var token: String? = null
     var tokenHead: String? = null

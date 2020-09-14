@@ -2,9 +2,9 @@ package androidx.fragment.app;
 
 import androidx.annotation.CallSuper;
 
-public class DialogFragment3 extends DialogFragment {
+public class DialogFragment4 extends DialogFragment {
 
-    public DialogFragment3() {
+    public DialogFragment4() {
     }
 
     @CallSuper

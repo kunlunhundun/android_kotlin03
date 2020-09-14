@@ -153,8 +153,7 @@ dependencies {
     implementation 'com.appsflyer:af-android-sdk:5.+'
     implementation 'com.android.installreferrer:installreferrer:2.1'
 
-    implementation 'com.google.firebase:firebase-analytics:17.5.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
 
     implementation 'net.aihelp:elva:1.4.3.2'
 
@@ -190,5 +189,3 @@ tasks.withType(JavaCompile) {
     options.deprecation = true
 }
 
-apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
-apply plugin: 'io.fabric'

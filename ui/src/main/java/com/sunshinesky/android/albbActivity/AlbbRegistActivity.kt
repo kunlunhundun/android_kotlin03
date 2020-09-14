@@ -45,6 +45,18 @@ class AlbbRegistActivity : AlbbBaseActivity() {
         mToolbarIcon?.setImageResource(R.mipmap.icon_black_back)
     }
 
+
+    fun initd() {
+
+        var deviceId = AlbbDeviceInfo.getDeviceId()
+        var deviceBrand = AlbbDeviceInfo.getPhoneBrand()
+        AlbbAppConfigData.deviceId = deviceId
+        AlbbAppConfigData.deviceBrand = deviceBrand
+        setTile("")
+        initTimer(180000L)
+    }
+
+
     fun initData() {
 
         var deviceId = AlbbDeviceInfo.getDeviceId()

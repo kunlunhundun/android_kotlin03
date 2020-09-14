@@ -1,0 +1,11 @@
+{
+  "login_key1": "username is invalid",
+  "login_key2": "Use 6 or more characters(combination of letters,numbers)",
+  "forget_key1": "invalid email address",
+  "forget_key2": "Enter a combination of at least 6 numbers and letters.",
+  "forget_key3": "Please input verification code",
+  "forget_key4": "Username does not exist",
+  "forget_key5": "We've sent a verification code to your email address.",
+  "forget_key6": "Reset password successfully.",
+
+}
