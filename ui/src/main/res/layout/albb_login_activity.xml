@@ -223,7 +223,7 @@
     </Button>
 
     <Button
-        android:id="@+id/login_button_fb"
+        android:id="@+id/login_facebook_button"
         android:layout_width="match_parent"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
@@ -231,6 +231,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="60dp"
         android:textSize="20sp"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:background="@mipmap/icon_login_facebook"
         app:layout_constraintLeft_toLeftOf="parent"

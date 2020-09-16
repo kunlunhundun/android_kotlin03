@@ -188,7 +188,7 @@ class AlbbLoginActivity : AlbbBaseActivity() , AlbbGetUserCallback.IGetUserRespo
 
         }
 
-        login_button_fb.setOnClickListener {
+        login_facebook_button.setOnClickListener {
 
             LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList(EMAIL,"public_profile"));
             LoginManager.getInstance().setAuthType(AUTH_TYPE)

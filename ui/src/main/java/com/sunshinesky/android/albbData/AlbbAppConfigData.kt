@@ -9,7 +9,7 @@ import com.sunshinesky.android.albbData.response.AlbbWireguardListResponseAlbb.V
 
 object AlbbAppConfigData {
 
-    const val runGateUrl = "https://syrinxvpn.com:8080"//运营环境
+    const val runGateUrl = "https://cattlevpn.com:8080"//运营环境
    // const val runGateUrl = "http://91.216.169.205:8082"
    // const val runGateUrl = "http://192.168.1.164:8082"//运营环境
   // https://trustsonic.com:8080

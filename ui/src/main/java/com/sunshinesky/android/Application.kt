@@ -39,7 +39,6 @@ import kotlin.collections.ArrayList
 
 //MultiDexApplication android.app.Application()
 
-
 class Application : android.app.Application(), OnSharedPreferenceChangeListener {
     private val futureBackend = CompletableFuture<Backend>()
     private lateinit var asyncWorker: AsyncWorker
@@ -195,7 +194,6 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
         }
         return  false
     }
-
 
     private fun AppsFlyerInstallCallBack() {
 
@@ -359,7 +357,6 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
         }
         return null
     }
-
 
 
 }

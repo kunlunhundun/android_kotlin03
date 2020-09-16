@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Please select a line"
+            android:text="No server selected"
             android:textColor="@color/text_white_color"
             android:textSize="16sp"
             app:layout_constraintLeft_toRightOf="@id/iv_country_flag"

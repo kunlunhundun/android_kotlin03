@@ -70,7 +70,7 @@ class AlbbForgetPasswordActivity : AlbbBaseActivity() {
             var email = et_user_name.text.toString().toLowerCase().trim()
             var ischeckEmail = AlbbUtils.isEmail(email)
             if (!ischeckEmail) {
-                ToastUtils.show("invalid email address")
+                ToastUtils.show("invalid email ")
 
             } else {
                 sendEmailCode(email)
@@ -83,7 +83,7 @@ class AlbbForgetPasswordActivity : AlbbBaseActivity() {
             var email = et_user_name.text.toString().toLowerCase().trim()
             var ischeckEmail = AlbbUtils.isEmail(email)
             if (!ischeckEmail) {
-                ToastUtils.show("invalid email address")
+                ToastUtils.show("invalid email ")
             } else {
                 sendEmailCode(email)
             }
@@ -97,11 +97,11 @@ class AlbbForgetPasswordActivity : AlbbBaseActivity() {
             var ischeckPassword = AlbbUtils.isPasswordCorrect(password)
             var ischeckCode = AlbbUtils.isCodeCorrect(code)
             if (!ischeckEmail) {
-                ToastUtils.show("invalid email address")
+                ToastUtils.show("invalid email ")
             } else if (!ischeckPassword) {
-                ToastUtils.show("Enter a combination of at least 6 numbers and letters.")
+                ToastUtils.show("Password must be at least 6 characters and include numbers and letters")
             } else if (!ischeckCode) {
-                ToastUtils.show("Please input verification code")
+                ToastUtils.show("Enter your verification code")
             } else if (ischeckEmail && ischeckPassword && ischeckCode) {
                 forgetPassword(email,password,code)
             }
@@ -144,7 +144,7 @@ class AlbbForgetPasswordActivity : AlbbBaseActivity() {
                     }
                     override fun businessSuccess(data: AlbbBaseResponseObject) {
 
-                        ToastUtils.show("We've sent a verification code to your email address. ")
+                        ToastUtils.show("We sent you a verification code to your email ")
                         mTimerAlbb.start()
                     }
                     override fun failure(statusCode: Int, albbApiErrorModel: AlbbApiErrorModel) {
