@@ -141,12 +141,9 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:3.7.0"
     implementation "com.github.vipulasri:timelineview:1.0.6"
     implementation "com.bigkoo:convenientbanner:2.0.5"
-    implementation "ccom.tencent.sonic:sdk:3.0.0"
+    implementation "com.tencent.sonic:sdk:3.0.0"
     implementation "com.github.dfqin:grantor:2.1.0"
     implementation "com.github.1002326270xc:LayoutManager-FlowLayout:v1.7"
-    implementation "com.github.Raizlabs.DBFlow:dbflow-processor:4.2.3"
-    implementation "com.github.Raizlabs.DBFlow:dbflow-core:"
-    implementation "com.github.Raizlabs.DBFlow:dbflow:"
     implementation "com.yuyh.easyguideview:library:1.2.2"
     implementation "com.zhy:base-rvadapter:3.0.3"
 
@@ -165,7 +162,6 @@ dependencies {
 
     implementation 'com.appsflyer:af-android-sdk:5.+'
     implementation 'com.android.installreferrer:installreferrer:2.1'
-
 
 
     implementation 'net.aihelp:elva:1.4.3.2'

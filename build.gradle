@@ -2,6 +2,7 @@
 allprojects {
     repositories {
         google()
+        maven { url "https://jitpack.io" }
         jcenter()
     }
 }
@@ -44,6 +45,7 @@ buildscript {
         maven {
             url 'https://storage.googleapis.com/r8-releases/raw'
         }
+        maven { url "https://jitpack.io" }
         google()
         jcenter()
     }
