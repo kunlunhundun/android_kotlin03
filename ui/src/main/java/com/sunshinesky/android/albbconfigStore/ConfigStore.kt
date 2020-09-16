@@ -1,6 +1,6 @@
 /*
  */
-package com.sunshinesky.android.configStore
+package com.sunshinesky.android.albbconfigStore
 
 import com.sunshinesky.config.Config
 

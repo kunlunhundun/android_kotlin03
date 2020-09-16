@@ -30,7 +30,6 @@ buildscript {
         streamsupportVersion = '1.7.2'
         threetenabpVersion = '1.2.4'
         zxingEmbeddedVersion = '3.6.0'
-
         groupName = 'com.sunshinesky.android'
     }
     dependencies {
@@ -40,7 +39,6 @@ buildscript {
         classpath "com.github.dcendents:android-maven-gradle-plugin:$mavenPluginVersion"
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:$bintrayPluginVersion"
 
-
     }
     repositories {
         maven {
@@ -48,7 +46,6 @@ buildscript {
         }
         google()
         jcenter()
-
     }
 }
 

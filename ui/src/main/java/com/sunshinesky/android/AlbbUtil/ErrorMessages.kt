@@ -1,12 +1,12 @@
 
-package com.sunshinesky.android.util
+package com.sunshinesky.android.AlbbUtil
 
 import android.content.res.Resources
 import android.os.RemoteException
-import com.sunshinesky.android.Application.Companion.get
+import com.sunshinesky.android.MyApplication.Companion.get
 import com.sunshinesky.android.R
 import com.sunshinesky.android.backend.BackendException
-import com.sunshinesky.android.util.RootShell.RootShellException
+import com.sunshinesky.android.AlbbUtil.RootShell.RootShellException
 import com.sunshinesky.config.BadConfigException
 import com.sunshinesky.config.InetEndpoint
 import com.sunshinesky.config.InetNetwork

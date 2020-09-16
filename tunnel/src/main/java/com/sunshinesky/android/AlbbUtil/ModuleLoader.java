@@ -1,12 +1,12 @@
 
 
-package com.sunshinesky.android.util;
+package com.sunshinesky.android.AlbbUtil;
 
 import android.content.Context;
 import android.system.OsConstants;
 import android.util.Base64;
 
-import com.sunshinesky.android.util.RootShell.RootShellException;
+import com.sunshinesky.android.AlbbUtil.RootShell.RootShellException;
 import com.sunshinesky.util.NonNullForAll;
 
 import net.i2p.crypto.eddsa.EdDSAEngine;

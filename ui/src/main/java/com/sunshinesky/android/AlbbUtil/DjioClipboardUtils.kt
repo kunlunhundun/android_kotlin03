@@ -1,5 +1,5 @@
 
-package com.sunshinesky.android.util
+package com.sunshinesky.android.AlbbUtil
 
 import android.content.ClipData
 import android.content.ClipboardManager

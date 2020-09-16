@@ -18,7 +18,7 @@
  *                                                                             *
  *******************************************************************************/
 
-package com.sunshinesky.android.util
+package com.sunshinesky.android.AlbbUtil
 
 import androidx.activity.ComponentActivity
 import androidx.annotation.MainThread

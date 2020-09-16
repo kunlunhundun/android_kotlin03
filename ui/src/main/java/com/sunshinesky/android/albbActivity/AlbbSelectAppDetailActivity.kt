@@ -4,7 +4,7 @@ package com.sunshinesky.android.albbActivity
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sunshinesky.android.Application
+import com.sunshinesky.android.MyApplication
 import com.sunshinesky.android.R
 import com.sunshinesky.android.albbModel.AlbbAppPackageModel
 import com.sunshinesky.android.albbWidget.adapter.AlbbAppDetailAdapter
@@ -33,8 +33,8 @@ class AlbbSelectAppDetailActivity : AlbbBaseActivity() {
         setTile("App select")
 
         isFromInclude =  intent.getBooleanExtra(AlbbAppFilterActivity.APP_ITEM_IS_INCLUDE,false)
-        selectedAlbbAppList = if (isFromInclude) Application.getAlbbIncludeAppList() else Application.getAlbbExcludeAppList()
-        mListData =Application.getAllAppList()
+        selectedAlbbAppList = if (isFromInclude) MyApplication.getAlbbIncludeAppList() else MyApplication.getAlbbExcludeAppList()
+        mListData =MyApplication.getAllAppList()
         mListData.forEach {
             it.isCheck = false;
             selectedAlbbAppList.forEach { item:AlbbAppPackageModel ->

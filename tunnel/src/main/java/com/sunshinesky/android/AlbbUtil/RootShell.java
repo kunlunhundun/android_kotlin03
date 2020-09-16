@@ -1,11 +1,11 @@
 
 
-package com.sunshinesky.android.util;
+package com.sunshinesky.android.AlbbUtil;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.sunshinesky.android.util.RootShell.RootShellException.Reason;
+import com.sunshinesky.android.AlbbUtil.RootShell.RootShellException.Reason;
 import com.sunshinesky.util.NonNullForAll;
 
 import java.io.BufferedReader;

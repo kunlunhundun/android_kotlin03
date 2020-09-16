@@ -25,13 +25,12 @@ import com.sunshinesky.android.albbModel.AlbbAppPackageModel
 import com.sunshinesky.android.albbData.net.AlbbApiClient
 import com.sunshinesky.android.albbUtils.AlbbACache
 import com.sunshinesky.android.albbUtils.AlbbLogUtils
-import com.sunshinesky.android.albbUtils.AlbbUtils
 import com.sunshinesky.android.backend.Backend
 import com.sunshinesky.android.backend.GoBackend
 import com.sunshinesky.android.backend.WgQuickBackend
-import com.sunshinesky.android.configStore.FileConfigStore
-import com.sunshinesky.android.model.TunnelManager
-import com.sunshinesky.android.util.*
+import com.sunshinesky.android.albbconfigStore.FileConfigStore
+import com.sunshinesky.android.dataObservable.TunnelManager
+import com.sunshinesky.android.AlbbUtil.*
 import java9.util.concurrent.CompletableFuture
 import java.lang.ref.WeakReference
 import java.util.*
@@ -39,7 +38,7 @@ import kotlin.collections.ArrayList
 
 //MultiDexApplication android.app.Application()
 
-class Application : android.app.Application(), OnSharedPreferenceChangeListener {
+class MyApplication : android.app.Application(), OnSharedPreferenceChangeListener {
     private val futureBackend = CompletableFuture<Backend>()
     private lateinit var asyncWorker: AsyncWorker
     private lateinit var rootShell: RootShell
@@ -240,7 +239,7 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
     companion object {
         val USER_AGENT = String.format(Locale.ENGLISH, "WireGuard/%s (Android %d; %s; %s; %s %s; %s)", BuildConfig.VERSION_NAME, Build.VERSION.SDK_INT, if (Build.SUPPORTED_ABIS.isNotEmpty()) Build.SUPPORTED_ABIS[0] else "unknown ABI", Build.BOARD, Build.MANUFACTURER, Build.MODEL, Build.FINGERPRINT)
         private const val TAG = "cattleVPN/Application"
-        private lateinit var weakSelf: WeakReference<Application>
+        private lateinit var weakSelf: WeakReference<MyApplication>
         public const val CACHE_ALLOW_APP_FLAG  = "cache_allow_app_flag" // 1:允许所有的app 2: 选择app可以vpn
         public const val CACHE_EXCCLUDE_DATA  = "cache_exclude_data" //
         public const val CACHE_INCLUDE_DATA  = "cache_include_data" // 包含的app
@@ -281,13 +280,13 @@ class Application : android.app.Application(), OnSharedPreferenceChangeListener 
 
 
         @JvmStatic
-        fun get(): Application {
+        fun get(): MyApplication {
             return weakSelf.get()!!
         }
 
         @JvmStatic
         fun getAcache(): AlbbACache {
-            return Application.get().mAcach
+            return MyApplication.get().mAcach
         }
 
         @JvmStatic

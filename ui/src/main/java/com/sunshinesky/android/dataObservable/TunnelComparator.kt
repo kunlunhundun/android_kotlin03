@@ -1,6 +1,6 @@
 
 
-package com.sunshinesky.android.model
+package com.sunshinesky.android.dataObservable
 
 import java.util.Locale
 

@@ -2,7 +2,7 @@
 
 package com.sunshinesky.android.albbData
 
-import com.sunshinesky.android.Application
+import com.sunshinesky.android.MyApplication
 import com.sunshinesky.android.BuildConfig
 import com.sunshinesky.android.albbData.response.AlbbCustomerObj
 import com.sunshinesky.android.albbData.response.AlbbWireguardListResponseAlbb.VpnServiceObject
@@ -45,11 +45,11 @@ object AlbbAppConfigData {
     var loginName: String? = null
         set(value) {
             field = value
-            Application.getAcache().put(ACACHE_LOGIN_NAME, field)
+            MyApplication.getAcache().put(ACACHE_LOGIN_NAME, field)
         }
         get() {
             if (field == null) {
-                field = Application.getAcache().getAsString(ACACHE_LOGIN_NAME)
+                field = MyApplication.getAcache().getAsString(ACACHE_LOGIN_NAME)
             }
             return field
         }
@@ -57,33 +57,33 @@ object AlbbAppConfigData {
     var password: String? = null
         set(value) {
             field = value
-            Application.getAcache().put(ACACHE_LOGIIN_PASSWORD, field)
+            MyApplication.getAcache().put(ACACHE_LOGIIN_PASSWORD, field)
         }
         get() {
             if (field == null) {
-                field = Application.getAcache().getAsString(ACACHE_LOGIIN_PASSWORD)
+                field = MyApplication.getAcache().getAsString(ACACHE_LOGIIN_PASSWORD)
             }
             return field
         }
     var deviceId: String? = null
         set(value) {
             field = value
-            Application.getAcache().put(ACACHE_DEVICE_ID, field)
+            MyApplication.getAcache().put(ACACHE_DEVICE_ID, field)
         }
         get() {
             if (field == null) {
-                field = Application.getAcache().getAsString(ACACHE_DEVICE_ID)
+                field = MyApplication.getAcache().getAsString(ACACHE_DEVICE_ID)
             }
             return field
         }
     var deviceBrand: String? = null
         set(value) {
             field = value
-            Application.getAcache().put(ACACHE_DEVICE_BRAND, field)
+            MyApplication.getAcache().put(ACACHE_DEVICE_BRAND, field)
         }
         get() {
             if (field == null) {
-                field = Application.getAcache().getAsString(ACACHE_DEVICE_BRAND)
+                field = MyApplication.getAcache().getAsString(ACACHE_DEVICE_BRAND)
             }
              return field
         }
@@ -99,11 +99,11 @@ object AlbbAppConfigData {
     var loginToken: String? = null
         set(value) {
             field = value
-            Application.getAcache().put(ACACHE_LOIN_TOKEN, field)
+            MyApplication.getAcache().put(ACACHE_LOIN_TOKEN, field)
         }
         get() {
             if (field == null) {
-                field = Application.getAcache().getAsString(ACACHE_LOIN_TOKEN)
+                field = MyApplication.getAcache().getAsString(ACACHE_LOIN_TOKEN)
             }
             return field
         }

@@ -7,8 +7,8 @@ import android.util.Pair;
 
 import com.sunshinesky.android.backend.BackendException.Reason;
 import com.sunshinesky.android.backend.Tunnel.State;
-import com.sunshinesky.android.util.RootShell;
-import com.sunshinesky.android.util.ToolsInstaller;
+import com.sunshinesky.android.AlbbUtil.RootShell;
+import com.sunshinesky.android.AlbbUtil.ToolsInstaller;
 import com.sunshinesky.config.Config;
 import com.sunshinesky.crypto.Key;
 import com.sunshinesky.util.NonNullForAll;

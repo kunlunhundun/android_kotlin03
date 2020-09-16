@@ -8,10 +8,10 @@ import android.view.KeyEvent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
-import com.sunshinesky.android.Application
-import com.sunshinesky.android.Application.Companion.CACHE_ALLOW_APP_FLAG
-import com.sunshinesky.android.Application.Companion.CACHE_EXCCLUDE_DATA
-import com.sunshinesky.android.Application.Companion.CACHE_INCLUDE_DATA
+import com.sunshinesky.android.MyApplication
+import com.sunshinesky.android.MyApplication.Companion.CACHE_ALLOW_APP_FLAG
+import com.sunshinesky.android.MyApplication.Companion.CACHE_EXCCLUDE_DATA
+import com.sunshinesky.android.MyApplication.Companion.CACHE_INCLUDE_DATA
 import com.sunshinesky.android.R
 import com.sunshinesky.android.albbModel.AlbbAppPackageModel
 import com.sunshinesky.android.albbModel.AlbbReconnectTunnelEvent
@@ -67,7 +67,7 @@ class AlbbAppFilterActivity : AlbbBaseActivity() {
     fun initData(){
 
         setTile("VPN settings")
-        var lastSelect = Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
+        var lastSelect = MyApplication.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
         AlbbLogUtils.e("lastselect:",lastSelect)
         originalAppFlag = lastSelect.toInt()
 
@@ -97,9 +97,9 @@ class AlbbAppFilterActivity : AlbbBaseActivity() {
         if (selectAppType == AppItemType.ALL) {
             mListData = ArrayList();
         } else if (selectAppType == AppItemType.EXCLUDE) {
-            mListData = Application.getAlbbExcludeAppList()
+            mListData = MyApplication.getAlbbExcludeAppList()
         } else if (selectAppType == AppItemType.INCLUDE) {
-            mListData = Application.getAlbbIncludeAppList()
+            mListData = MyApplication.getAlbbIncludeAppList()
         }
         albbAppFilterAdpater?.setDataList(mListData)
     }
@@ -133,7 +133,7 @@ class AlbbAppFilterActivity : AlbbBaseActivity() {
         cl_all_app.setOnClickListener {
             mListData = ArrayList()
             selectAppType = AppItemType.ALL
-            Application.getAcache().put(CACHE_ALLOW_APP_FLAG,selectAppType.value.toString())
+            MyApplication.getAcache().put(CACHE_ALLOW_APP_FLAG,selectAppType.value.toString())
 
             rv_app_channel.visibility = View.GONE
             ck_all_app_choose.isChecked = true
@@ -142,9 +142,9 @@ class AlbbAppFilterActivity : AlbbBaseActivity() {
         }
         cl_exclude_app.setOnClickListener {
             selectAppType = AppItemType.EXCLUDE
-            mListData = Application.getAlbbExcludeAppList()
+            mListData = MyApplication.getAlbbExcludeAppList()
             albbAppFilterAdpater?.setDataList(mListData)
-            Application.getAcache().put(CACHE_ALLOW_APP_FLAG,  selectAppType.value.toString())
+            MyApplication.getAcache().put(CACHE_ALLOW_APP_FLAG,  selectAppType.value.toString())
 
             rv_app_channel.visibility = View.VISIBLE
             ck_all_app_choose.isChecked = false
@@ -153,9 +153,9 @@ class AlbbAppFilterActivity : AlbbBaseActivity() {
         }
         cl_include_app.setOnClickListener {
             selectAppType = AppItemType.INCLUDE
-            mListData = Application.getAlbbIncludeAppList()
+            mListData = MyApplication.getAlbbIncludeAppList()
             albbAppFilterAdpater?.setDataList(mListData)
-            Application.getAcache().put(CACHE_ALLOW_APP_FLAG,  selectAppType.value.toString())
+            MyApplication.getAcache().put(CACHE_ALLOW_APP_FLAG,  selectAppType.value.toString())
 
             rv_app_channel.visibility = View.VISIBLE
             ck_all_app_choose.isChecked = false
@@ -173,11 +173,11 @@ class AlbbAppFilterActivity : AlbbBaseActivity() {
                 appNameList.add(it.name!!)
             }
             val nameListStr =  Gson().toJson(appNameList)
-            val cacheName = Application.getAcache().getAsString(CACHE_EXCCLUDE_DATA)
+            val cacheName = MyApplication.getAcache().getAsString(CACHE_EXCCLUDE_DATA)
             if (nameListStr != cacheName){
-                Application.get().isNeedConnectByModifyAppFlag = true
+                MyApplication.get().isNeedConnectByModifyAppFlag = true
             }
-            Application.getAcache().put(CACHE_EXCCLUDE_DATA, nameListStr)
+            MyApplication.getAcache().put(CACHE_EXCCLUDE_DATA, nameListStr)
         } else if (selectAppType == AppItemType.INCLUDE) {
 
             var appNameList: ArrayList<String> = ArrayList()
@@ -185,21 +185,21 @@ class AlbbAppFilterActivity : AlbbBaseActivity() {
                 appNameList.add(it.name!!)
             }
             val nameListStr =  Gson().toJson(appNameList)
-            val cacheName = Application.getAcache().getAsString(CACHE_INCLUDE_DATA)
+            val cacheName = MyApplication.getAcache().getAsString(CACHE_INCLUDE_DATA)
             if (nameListStr != cacheName){
-                Application.get().isNeedConnectByModifyAppFlag = true
+                MyApplication.get().isNeedConnectByModifyAppFlag = true
             }
-            Application.getAcache().put(CACHE_INCLUDE_DATA, nameListStr)
+            MyApplication.getAcache().put(CACHE_INCLUDE_DATA, nameListStr)
         }
-        var lastSelect = Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
+        var lastSelect = MyApplication.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
 
         if (originalAppFlag  == 1) {
             if (lastSelect.toInt() != 1) {
-                Application.get().isNeedConnectByModifyAppFlag = true
+                MyApplication.get().isNeedConnectByModifyAppFlag = true
                 EventBus.getDefault().post(AlbbReconnectTunnelEvent())
             }
         } else {
-            if ( Application.get().isNeedConnectByModifyAppFlag == true) {
+            if ( MyApplication.get().isNeedConnectByModifyAppFlag == true) {
                 EventBus.getDefault().post(AlbbReconnectTunnelEvent())
             }
         }

@@ -1,5 +1,5 @@
 
-package com.sunshinesky.android.util
+package com.sunshinesky.android.AlbbUtil
 
 import android.content.ContentValues
 import android.content.Context
@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.MediaColumns
-import com.sunshinesky.android.R
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

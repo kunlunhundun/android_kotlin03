@@ -1,6 +1,6 @@
 /*
  */
-package com.sunshinesky.android.databinding
+package com.sunshinesky.android.dataObservable
 
 import androidx.databinding.ObservableArrayList
 

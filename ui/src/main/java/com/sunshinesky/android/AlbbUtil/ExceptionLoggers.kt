@@ -1,5 +1,5 @@
 
-package com.sunshinesky.android.util
+package com.sunshinesky.android.AlbbUtil
 
 import android.util.Log
 import java9.util.function.BiConsumer

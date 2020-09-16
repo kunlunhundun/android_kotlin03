@@ -1,5 +1,5 @@
 
-package com.sunshinesky.android.model
+package com.sunshinesky.android.dataObservable
 
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
@@ -8,18 +8,17 @@ import android.content.Intent
 import android.os.Build
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.sunshinesky.android.Application.Companion.get
-import com.sunshinesky.android.Application.Companion.getAsyncWorker
-import com.sunshinesky.android.Application.Companion.getBackend
-import com.sunshinesky.android.Application.Companion.getSharedPreferences
-import com.sunshinesky.android.Application.Companion.getTunnelManager
+import com.sunshinesky.android.MyApplication.Companion.get
+import com.sunshinesky.android.MyApplication.Companion.getAsyncWorker
+import com.sunshinesky.android.MyApplication.Companion.getBackend
+import com.sunshinesky.android.MyApplication.Companion.getSharedPreferences
+import com.sunshinesky.android.MyApplication.Companion.getTunnelManager
 import com.sunshinesky.android.BR
 import com.sunshinesky.android.R
 import com.sunshinesky.android.backend.Statistics
 import com.sunshinesky.android.backend.Tunnel
-import com.sunshinesky.android.configStore.ConfigStore
-import com.sunshinesky.android.databinding.ObservableSortedKeyedArrayList
-import com.sunshinesky.android.util.ExceptionLoggers
+import com.sunshinesky.android.albbconfigStore.ConfigStore
+import com.sunshinesky.android.AlbbUtil.ExceptionLoggers
 import com.sunshinesky.config.Config
 import java9.util.concurrent.CompletableFuture
 import java9.util.concurrent.CompletionStage

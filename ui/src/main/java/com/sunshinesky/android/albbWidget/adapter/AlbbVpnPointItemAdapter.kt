@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.sunshinesky.android.Application
+import com.sunshinesky.android.MyApplication
 import com.sunshinesky.android.R
 import com.sunshinesky.android.albbModel.AlbbVpnPointModel
 
@@ -41,7 +41,7 @@ class AlbbVpnPointItemAdapter (mList: MutableList<AlbbVpnPointModel>) : Recycler
                 onItemClickLister?.onItemClick(position)
             }
             holder.pointName.text = model.pointName
-            val icon = Application.get().resources.getIdentifier(model.icon, "mipmap", Application.get().packageName)
+            val icon = MyApplication.get().resources.getIdentifier(model.icon, "mipmap", MyApplication.get().packageName)
             holder.iconFlag.setImageResource(icon)
         }
     }

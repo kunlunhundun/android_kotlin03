@@ -3,7 +3,7 @@
 
 package com.sunshinesky.android.albbData.net
 
-import com.sunshinesky.android.Application
+import com.sunshinesky.android.MyApplication
 import com.sunshinesky.android.albbData.AlbbAppConfigData
 import com.sunshinesky.android.albbUtils.AlbbLogUtils
 import com.sunshinesky.android.albbUtils.AlbbNetWorkUtil
@@ -44,7 +44,7 @@ class AlbbApiClient private constructor() {
         var simulateResponseInterceptor = SimulateResponseInterceptor()
         NetApiInterceptorList.init()
 
-        val cache = Cache(File(Application.get().externalCacheDir, "File_VPN"), 10 * 1024 * 1024)
+        val cache = Cache(File(MyApplication.get().externalCacheDir, "File_VPN"), 10 * 1024 * 1024)
         val mOkHttpClient = OkHttpClient.Builder()
                 .cache(cache)
                 .retryOnConnectionFailure(false)

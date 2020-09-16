@@ -25,7 +25,7 @@ import com.sunshinesky.android.albbData.net.AlbbApiResponse
 import com.sunshinesky.android.albbData.net.AlbbNetworkScheduler
 import com.sunshinesky.android.albbData.response.AlbbWireguardListResponseAlbb
 
-import com.sunshinesky.android.util.AlbbSingleInstanceActivity
+import com.sunshinesky.android.AlbbUtil.AlbbSingleInstanceActivity
 import kotlinx.android.synthetic.main.albb_main_activity.*
 
 class AlbbMainActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {

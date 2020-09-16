@@ -7,7 +7,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.util.Log
-import com.sunshinesky.android.Application
+import com.sunshinesky.android.MyApplication
 import java.net.NetworkInterface
 import java.net.SocketException
 
@@ -20,7 +20,7 @@ import java.net.SocketException
 object AlbbNetWorkUtil {
     @JvmStatic
     fun isNetWorkConnected(): Boolean {
-        val cm = Application.get().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val cm = MyApplication.get().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val currentNet = cm.activeNetworkInfo ?: return false
         return currentNet.isAvailable
     }

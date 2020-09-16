@@ -24,8 +24,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.githang.statusbar.StatusBarCompat
 import com.hjq.toast.ToastUtils
 import com.ljoy.chatbot.sdk.ELvaChatServiceSdk
-import com.sunshinesky.android.Application
-import com.sunshinesky.android.Application.Companion.CACHE_ALLOW_APP_FLAG
+import com.sunshinesky.android.MyApplication
+import com.sunshinesky.android.MyApplication.Companion.CACHE_ALLOW_APP_FLAG
 import com.sunshinesky.android.R
 import com.sunshinesky.android.albbActivity.AlbbAppFilterActivity
 import com.sunshinesky.android.albbActivity.AlbbAppFilterActivity.Companion.FILTER_RESULT_OK
@@ -49,8 +49,8 @@ import com.sunshinesky.android.albbUtils.AlbbLogUtils
 import com.sunshinesky.android.backend.Backend
 import com.sunshinesky.android.backend.GoBackend
 import com.sunshinesky.android.backend.Tunnel
-import com.sunshinesky.android.model.ObservableTunnel
-import com.sunshinesky.android.util.ErrorMessages
+import com.sunshinesky.android.dataObservable.ObservableTunnel
+import com.sunshinesky.android.AlbbUtil.ErrorMessages
 import com.sunshinesky.config.Config
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
@@ -282,7 +282,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
 
 
     private fun configAPPItemAlbbTiandao( flag: Int) {
-        val appFlag =  Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
+        val appFlag =  MyApplication.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
         AlbbLogUtils.e("configAPPItem---->" + appFlag)
 
         if (flag == 1) {
@@ -303,7 +303,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
 
         if (appFlag.toInt() == 2) {
             tv_select_app_filter?.text = "Do not allow selected apps to use"
-            var excludeApps = Application.getAlbbExcludeAppList()
+            var excludeApps = MyApplication.getAlbbExcludeAppList()
             albbHomeAppAdapter?.setDataList(excludeApps)
             for (appItem in excludeApps) {
                 appname = appname + appItem.name + ","
@@ -315,7 +315,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         }
         if (appFlag.toInt() == 3) {
             tv_select_app_filter?.text = "Allow selected apps to use"
-            var includeApps = Application.getAlbbIncludeAppList()
+            var includeApps = MyApplication.getAlbbIncludeAppList()
             albbHomeAppAdapter?.setDataList(includeApps)
             for (appItem in includeApps) {
                 appname = appname + appItem.name + ","
@@ -327,7 +327,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         }
         AlbbLogUtils.e("appname---->" + appname)
 
-        installAppNames = Application.getInstallAppNameList().toString()
+        installAppNames = MyApplication.getInstallAppNameList().toString()
         installAppNames.replace("[","")
         installAppNames.replace("]","")
 
@@ -352,7 +352,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
             startAndStopWireGuard()
             Handler().postDelayed(Runnable {
                 if (selectedTunnel != null) {
-                    Application.getTunnelManager().delete(selectedTunnel!!)
+                    MyApplication.getTunnelManager().delete(selectedTunnel!!)
                     selectedTunnel = null
                     startConnectAnimation()
                 }
@@ -388,7 +388,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         currentConfig = config
         var random = (Math.random()*9+1)*1000
         val name = "tianya" + random.toLong()
-        Application.getTunnelManager().create(name, config).whenComplete { tunnel, throwable ->
+        MyApplication.getTunnelManager().create(name, config).whenComplete { tunnel, throwable ->
             if (tunnel != null) {
                 setCurrentTunnul(tunnel)
                 setConfigApp()
@@ -402,7 +402,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
     }
 
     private  fun findTunnelByTunnelName(tunnelName: String) {
-        Application.getTunnelManager()
+        MyApplication.getTunnelManager()
                 .tunnels
                 .thenAccept {
                     setCurrentTunnul(it[tunnelName])
@@ -430,7 +430,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
     }
 
     private fun configAPPItem() {
-        val appFlag =  Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
+        val appFlag =  MyApplication.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
         AlbbLogUtils.e("configAPPItem---->" + appFlag)
 
         if(appFlag.toInt() == 1) {
@@ -448,7 +448,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
 
         if (appFlag.toInt() == 2) {
             tv_select_app_filter?.text = "Do not allow selected apps to use"
-            var excludeApps = Application.getAlbbExcludeAppList()
+            var excludeApps = MyApplication.getAlbbExcludeAppList()
             albbHomeAppAdapter?.setDataList(excludeApps)
             for (appItem in excludeApps) {
                 appname = appname + appItem.name + ","
@@ -460,7 +460,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         }
         if (appFlag.toInt() == 3) {
             tv_select_app_filter?.text = "Allow selected apps to use"
-            var includeApps = Application.getAlbbIncludeAppList()
+            var includeApps = MyApplication.getAlbbIncludeAppList()
             albbHomeAppAdapter?.setDataList(includeApps)
             for (appItem in includeApps) {
                 appname = appname + appItem.name + ","
@@ -472,7 +472,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         }
         AlbbLogUtils.e("appname---->" + appname)
 
-        installAppNames = Application.getInstallAppNameList().toString()
+        installAppNames = MyApplication.getInstallAppNameList().toString()
         installAppNames.replace("[","")
         installAppNames.replace("]","")
 
@@ -481,7 +481,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
 
    private fun setConfigApp() {
        var applicationsSet:MutableSet<String> =  mutableSetOf()
-       val appFlag =  Application.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
+       val appFlag =  MyApplication.getAcache().getAsString(CACHE_ALLOW_APP_FLAG) ?: "1"
 
        if(appFlag.toInt() == 1) {
            tv_all_app_filter?.visibility = View.VISIBLE
@@ -494,7 +494,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
        rv_app_home_item?.visibility = View.VISIBLE
 
        if (appFlag.toInt() == 2) {
-           var excludeApps = Application.getAlbbExcludeAppList()
+           var excludeApps = MyApplication.getAlbbExcludeAppList()
            excludeApps.forEach {
                applicationsSet.add(it.packageName!!)
            }
@@ -505,7 +505,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
            albbHomeAppAdapter?.setDataList(excludeApps)
        }
        if (appFlag.toInt() == 3) {
-           var includeApps = Application.getAlbbIncludeAppList()
+           var includeApps = MyApplication.getAlbbIncludeAppList()
            includeApps.forEach {
                applicationsSet.add(it.packageName!!)
            }
@@ -536,7 +536,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
 
     fun setTunnelState(checked: Boolean) {
         val tunnel = selectedTunnel
-        Application.getBackendAsync().thenAccept { backend: Backend? ->
+        MyApplication.getBackendAsync().thenAccept { backend: Backend? ->
             if (backend is GoBackend) {
                 val intent = GoBackend.VpnService.prepare(this.context)
                 if (intent != null) {
@@ -795,7 +795,7 @@ class AlbbTunnelConnectFragment : AlbbToolbarFragment(),OnListenerObservableTunn
         return
         val handler = Handler()
         var runnable = Runnable {
-            if (Application.get().isNeedConnectByModifyAppFlag) {
+            if (MyApplication.get().isNeedConnectByModifyAppFlag) {
 
                 if( selectedTunnel?.getDataState() == Tunnel.State.UP) {
                     startAndStopWireGuard()

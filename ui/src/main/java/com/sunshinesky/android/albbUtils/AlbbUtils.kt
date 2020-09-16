@@ -10,7 +10,7 @@ import android.telephony.TelephonyManager
 import android.text.TextUtils
 import com.github.dfqin.grantor.PermissionsUtil
 import com.hjq.toast.ToastUtils
-import com.sunshinesky.android.Application
+import com.sunshinesky.android.MyApplication
 import com.vector.update_app.UpdateAppBean
 import com.vector.update_app.UpdateAppManager
 import com.vector.update_app.service.DownloadService
@@ -68,8 +68,8 @@ object AlbbUtils {
     @JvmStatic
     fun getVersion(): String {
         return try {
-            val manager = Application.get()!!.packageManager
-            val info = manager.getPackageInfo(Application.get().packageName, 0)
+            val manager = MyApplication.get()!!.packageManager
+            val info = manager.getPackageInfo(MyApplication.get().packageName, 0)
             val version = info.versionName
             version
         } catch (e: Exception) {
@@ -86,8 +86,8 @@ object AlbbUtils {
     @JvmStatic
     fun getVersionCode(): Int {
         return try {
-            val manager = Application.get()!!.packageManager
-            val info = manager.getPackageInfo(Application.get()!!.packageName, 0)
+            val manager = MyApplication.get()!!.packageManager
+            val info = manager.getPackageInfo(MyApplication.get()!!.packageName, 0)
             val version = info.versionCode
             version
         } catch (e: Exception) {
@@ -189,9 +189,9 @@ object AlbbUtils {
     @JvmStatic
     private fun getTelephonyManager(): TelephonyManager? {
 
-        if (PermissionsUtil.hasPermission(Application.get().applicationContext, Manifest.permission.READ_PHONE_STATE)) {
+        if (PermissionsUtil.hasPermission(MyApplication.get().applicationContext, Manifest.permission.READ_PHONE_STATE)) {
             if (sTelephonyManager == null) {
-                sTelephonyManager = Application.get().getSystemService(
+                sTelephonyManager = MyApplication.get().getSystemService(
                         Context.TELEPHONY_SERVICE) as TelephonyManager?
             }
         }

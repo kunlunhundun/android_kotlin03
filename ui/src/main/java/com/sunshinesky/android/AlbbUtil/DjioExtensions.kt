@@ -1,6 +1,6 @@
 
 
-package com.sunshinesky.android.util
+package com.sunshinesky.android.AlbbUtil
 
 import android.content.Context
 import android.util.TypedValue

@@ -1,5 +1,5 @@
 
-package com.sunshinesky.android.model
+package com.sunshinesky.android.dataObservable
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
@@ -7,8 +7,7 @@ import com.sunshinesky.android.BR
 import com.sunshinesky.android.albbInterface.OnListenerObservableTunnel
 import com.sunshinesky.android.backend.Statistics
 import com.sunshinesky.android.backend.Tunnel
-import com.sunshinesky.android.databinding.Keyed
-import com.sunshinesky.android.util.ExceptionLoggers
+import com.sunshinesky.android.AlbbUtil.ExceptionLoggers
 import com.sunshinesky.config.Config
 import java9.util.concurrent.CompletableFuture
 import java9.util.concurrent.CompletionStage

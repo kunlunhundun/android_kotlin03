@@ -19,7 +19,7 @@ import android.widget.ImageView
 import androidx.fragment.app.DialogFragment
 import com.gyf.barlibrary.ImmersionBar
 import com.hjq.toast.ToastUtils
-import com.sunshinesky.android.Application
+import com.sunshinesky.android.MyApplication
 import com.sunshinesky.android.R
 
 
@@ -111,7 +111,7 @@ class AlbbShareToFriendsDialog : DialogFragment(){
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.setType("text/*");
         if (packageName.contains("facebook")) {
-            val imageUri: Uri = Uri.parse("android.resource://" + Application.get().getPackageName().toString() + "/" + R.mipmap.ic_launcher)
+            val imageUri: Uri = Uri.parse("android.resource://" + MyApplication.get().getPackageName().toString() + "/" + R.mipmap.ic_launcher)
             shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
             shareIntent.setType("image/*");
 
@@ -128,7 +128,7 @@ class AlbbShareToFriendsDialog : DialogFragment(){
     private fun appInstalledOrNot(packageName: String): Boolean {
         var app_installed = false
         app_installed = try {
-            val info = Application.get()!!.packageManager.getApplicationInfo(packageName, 0)
+            val info = MyApplication.get()!!.packageManager.getApplicationInfo(packageName, 0)
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false

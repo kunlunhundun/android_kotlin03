@@ -1,6 +1,6 @@
 
 
-package com.sunshinesky.android.util
+package com.sunshinesky.android.AlbbUtil
 
 import android.annotation.SuppressLint
 import android.app.KeyguardManager
@@ -14,7 +14,6 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
-import com.sunshinesky.android.R
 
 
 object DjioBiometricAuthenticator {

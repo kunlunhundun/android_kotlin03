@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.sunshinesky.android.backend.BackendException.Reason;
 import com.sunshinesky.android.backend.Tunnel.State;
-import com.sunshinesky.android.util.SharedLibraryLoader;
+import com.sunshinesky.android.AlbbUtil.SharedLibraryLoader;
 import com.sunshinesky.config.Config;
 import com.sunshinesky.config.InetNetwork;
 import com.sunshinesky.config.Peer;

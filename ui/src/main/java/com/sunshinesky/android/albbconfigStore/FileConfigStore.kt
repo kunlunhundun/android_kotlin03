@@ -1,6 +1,6 @@
 /*
  */
-package com.sunshinesky.android.configStore
+package com.sunshinesky.android.albbconfigStore
 
 import android.content.Context
 import android.util.Log

@@ -34,7 +34,7 @@
         android:protectionLevel="dangerous" />
 
     <application
-        android:name=".Application"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:banner="@mipmap/ic_launcher"
         android:icon="@mipmap/ic_launcher"
@@ -188,7 +188,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".model.TunnelManager$IntentReceiver"
+            android:name=".dataObservable.TunnelManager$IntentReceiver"
             android:permission="${applicationId}.permission.CONTROL_TUNNELS">
             <intent-filter>
                 <action android:name="com.sunshinesky.android.action.REFRESH_TUNNEL_STATES" />

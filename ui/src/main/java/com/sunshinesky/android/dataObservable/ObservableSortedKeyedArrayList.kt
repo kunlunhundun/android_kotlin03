@@ -1,5 +1,5 @@
 
-package com.sunshinesky.android.databinding
+package com.sunshinesky.android.dataObservable
 
 import java.util.AbstractList
 import java.util.Collections
